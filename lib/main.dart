@@ -1,16 +1,14 @@
+import 'package:ecurie_party/db/database.dart';
 import 'package:flutter/material.dart';
-import 'package:ecurie_party/mongodb.dart';
-import 'dart:async';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await MongoDatabase.connect();
+void main() async {
   runApp(const MyApp());
 }
 
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+  static final myDb = DataBase("dbAdmin", "dbAdminPassword", "cluster0.oljmo2v.mongodb.net", "");
 
   // This widget is the root of your application.
   @override
