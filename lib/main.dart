@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:ecurie_party/mongodb.dart';
+import 'dart:async';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await MongoDatabase.connect();
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
