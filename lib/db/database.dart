@@ -58,21 +58,36 @@ class DataBase {
 
   getCollection(String collectionName) async{
     if (db == null){ await _init(); }
-    return await db.collection(collectionName);
+    DbCollection collection = db.collection(collectionName);
+
+    return await collection.find().toList();
   }
 
-  update(String collectionName, String data) async{
+  get(String collectionName, Map<String, dynamic> selector) async{
     if (db == null){ await _init(); }
-    return await db.collection(collectionName);
+    DbCollection collection = db.collection(collectionName);
+
+    return await collection.find(selector).toList();
   }
 
-  insert(String collectionName, String data) async{
+  update(String collectionName, Map<String, dynamic> selector, String data) async{
     if (db == null){ await _init(); }
-    return await db.collection(collectionName);
+    DbCollection collection = db.collection(collectionName);
+
+    return await collection.updateOne(where.raw(selector), data);
   }
 
-  delete(String collectionName, String data) async{
+  insert(String collectionName, Map<String, dynamic> data) async{
     if (db == null){ await _init(); }
-    return await db.collection(collectionName);
+    DbCollection collection = db.collection(collectionName);
+
+    return await collection.insertOne(data);
+  }
+
+  delete(String collectionName, Map<String, dynamic> selector) async{
+    if (db == null){ await _init(); }
+    DbCollection collection = db.collection(collectionName);
+
+    return await collection.deleteOne(where.raw(selector));
   }
 }
