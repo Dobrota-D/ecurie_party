@@ -1,13 +1,11 @@
 import 'package:ecurie_party/Pages/actualites.dart';
 import 'package:ecurie_party/Pages/profil.dart';
-import 'package:ecurie_party/tools/DateHandler.dart';
 import 'package:ecurie_party/tools/constants.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../widget/widget_store.dart';
 import '../add_event_page.dart';
 import '../calendrier.dart';
 
@@ -296,7 +294,7 @@ class _form_concours extends State<form_concours> {
             ),
           ],
         ),
-      ],
+      ),
     );
   }
 
