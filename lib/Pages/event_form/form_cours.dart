@@ -2,21 +2,21 @@ import 'package:ecurie_party/Pages/actualites.dart';
 import 'package:ecurie_party/Pages/profil.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
-import 'package:intl/intl.dart';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 
-import 'add_event_page.dart';
-import 'calendrier.dart';
+import 'package:intl/intl.dart';
+import '../add_event_page.dart';
+import '../calendrier.dart';
 
-class form_concours extends StatefulWidget {
+class form_cours extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _form_concours();
+    return _form_cours();
   }
 }
 
-class _form_concours extends State<form_concours> {
+class _form_cours extends State<form_cours> {
   final ValueNotifier<DateTime?> dateSub = ValueNotifier(null);
   final ValueNotifier<DateTime?> longDateSub = ValueNotifier(null);
   final ValueNotifier<TimeOfDay?> timeSub = ValueNotifier(null);
@@ -24,26 +24,18 @@ class _form_concours extends State<form_concours> {
   final TextEditingController meetingName = TextEditingController();
   final TextEditingController meetingLink = TextEditingController();
 
+  Color _colorFond = const Color(0xFFFFF3E0);
+  Color _colorButton = const Color(0xFF730800);
+  Color _colorBottumNavBar = const Color(0xFF8D6E63);
+
   final _formKey = GlobalKey<FormState>();
   TextEditingController EventNameController = TextEditingController();
-  TextEditingController EventImageController = TextEditingController();
 
   String _dropDownDiscipline = "Discipline";
   String _dropDownLieux = "Lieux";
 
-  bool value = false;
-
   @override
   Widget build(BuildContext context) {
-    Color _colorFond = const Color(0xFFFFF3E0);
-    Color _colorButton = const Color(0xFF730800);
-    Color _colorBottumNavBar = const Color(0xFF8D6E63);
-
-    bool? check1 = false;
-    bool? check2 = false;
-    bool? check3 = false;
-
-
     return Stack(
       children: [
         Container(
@@ -51,11 +43,10 @@ class _form_concours extends State<form_concours> {
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
-          // <-- SCAFFOLD WITH TRANSPARENT BG
           appBar: AppBar(
               backgroundColor: _colorButton,
               centerTitle: true,
-              title: Text('Créer une course')),
+              title: Text('Créer un cours')),
           bottomNavigationBar: BottomAppBar(
             color: _colorFond,
             // <-- APPBAR WITH TRANSPARENT BG
@@ -122,11 +113,26 @@ class _form_concours extends State<form_concours> {
               ],
             ),
           ),
-
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const Text(
+                  '.',
+                  style: TextStyle(
+                    fontSize: 1,
+                    fontFamily: 'PressStart',
+                    color: Colors.white,
+                  ),
+                ),
+                const Text(
+                  'Ajouter un cours',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 30,
+                  ),
+                ),
+
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
@@ -145,79 +151,90 @@ class _form_concours extends State<form_concours> {
                     },
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: UnderlineInputBorder(),
-                      fillColor: _colorButton,
-                      labelText: 'URL Image',
-                    ),
-                    controller: EventImageController,
-                    validator: (textMail) {
-                      if (textMail!.isEmpty) {
-                        return 'Veuillez saisir un texte';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: ValueListenableBuilder<DateTime?>(
-                      valueListenable: dateSub,
-                      builder: (context, dateVal, child) {
-                        return InkWell(
-                            onTap: () async {
-                              DateTime? date = await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime.now(),
-                                  lastDate: DateTime(2050),
-                                  currentDate: DateTime.now(),
-                                  initialEntryMode:
-                                      DatePickerEntryMode.calendar,
-                                  initialDatePickerMode: DatePickerMode.day,
-                                  builder: (context, child) {
-                                    return Theme(
-                                      data: Theme.of(context).copyWith(
-                                          colorScheme: ColorScheme.light(
-                                        primary: Colors.blueGrey,
-                                        // onSurface: AppColors.blackCoffee,
-                                      )),
-                                      child: child!,
-                                    );
-                                  });
-                              dateSub.value = date;
-                            },
-                            child: buildDateTimePicker(
-                                dateVal != null ? convertDate(dateVal) : ''));
-                      }),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: ValueListenableBuilder<TimeOfDay?>(
-                      valueListenable: timeSubShort,
-                      builder: (context, timeVal, child) {
-                        return InkWell(
-                            onTap: () async {
-                              TimeOfDay? time = await showTimePicker(
+            Padding(
+              padding:
+              const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: ValueListenableBuilder<DateTime?>(
+                    valueListenable: dateSub,
+                    builder: (context, dateVal, child) {
+                      return InkWell(
+                          onTap: () async {
+                            DateTime? date = await showDatePicker(
                                 context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime.now(),
+                                lastDate: DateTime(2050),
+                                currentDate: DateTime.now(),
+                                initialEntryMode: DatePickerEntryMode.calendar,
+                                initialDatePickerMode: DatePickerMode.day,
                                 builder: (context, child) {
                                   return Theme(
-                                    data: Theme.of(context),
+                                    data: Theme.of(context).copyWith(
+                                        colorScheme: ColorScheme.light(
+                                          primary: Colors.blueGrey,
+                                          // onSurface: AppColors.blackCoffee,
+                                        )),
                                     child: child!,
                                   );
-                                },
-                                initialTime: TimeOfDay.now(),
-                              );
-                              timeSubShort.value = time;
-                            },
-                            child: buildDateTimePicker(
-                                timeVal != null ? convertTime(timeVal) : ''));
+                                });
+                            dateSub.value = date;
+                          },
+                          child: buildDateTimePicker(
+                              dateVal != null ? convertDate(dateVal) : ''));
+                    }),
+            ),
+            Padding(
+              padding:
+              const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: ValueListenableBuilder<TimeOfDay?>(
+                    valueListenable: timeSubShort,
+                    builder: (context, timeVal, child) {
+                      return InkWell(
+                          onTap: () async {
+                            TimeOfDay? time = await showTimePicker(
+                              context: context,
+                              builder: (context, child) {
+                                return Theme(
+                                  data: Theme.of(context),
+                                  child: child!,
+                                );
+                              },
+                              initialTime: TimeOfDay.now(),
+                            );
+                            timeSubShort.value = time;
+                          },
+                          child: buildDateTimePicker(timeVal != null
+                              ? convertTime(timeVal)
+                              : ''));
+                    }),
+            ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: DropdownButton(
+                      hint: _dropDownDiscipline == null
+                          ? Text('Discipline')
+                          : Text(
+                              _dropDownDiscipline,
+                              style: TextStyle(color: Colors.blue),
+                            ),
+                      isExpanded: true,
+                      iconSize: 30.0,
+                      style: TextStyle(color: Colors.blue),
+                      items: ['Endurance', 'Entretient', 'Grand galop'].map(
+                        (val) {
+                          return DropdownMenuItem<String>(
+                            value: val,
+                            child: Text(val),
+                          );
+                        },
+                      ).toList(),
+                      onChanged: (val) {
+                        setState(
+                          () {
+                            _dropDownDiscipline = val!;
+                          },
+                        );
                       }),
                 ),
                 Padding(
@@ -249,42 +266,6 @@ class _form_concours extends State<form_concours> {
                         );
                       }),
                 ),
-
-
-                CheckboxListTile(
-                  //checkbox positioned at right
-                  value: check1,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      check1 = value;
-                    });
-                  },
-                  title: Text("Petit pas"),
-                ),
-                CheckboxListTile(
-                  //checkbox positioned at right
-                  value: check2,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      check2 = value;
-                    });
-                  },
-                  title: Text("Moyen trot"),
-                ),
-                CheckboxListTile(
-                  //checkbox positioned at right
-                  value: check3,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      check3 = value;
-                    });
-                  },
-                  title: Text("Grand galop"),
-                ),
-
-
-
-
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -300,7 +281,7 @@ class _form_concours extends State<form_concours> {
                     shadowColor: Colors.transparent.withOpacity(0.1),
                   ),
                   child: Text(
-                    "Créer une course",
+                    "Créer un cours",
                     style: TextStyle(
                       color: _colorButton,
                       fontSize: 22,
@@ -310,7 +291,7 @@ class _form_concours extends State<form_concours> {
               ],
             ),
           ),
-        ),
+        )
       ],
     );
   }

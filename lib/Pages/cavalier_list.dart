@@ -1,5 +1,5 @@
 import 'package:ecurie_party/Pages/profil.dart';
-import 'package:ecurie_party/Pages/user.dart';
+import 'package:ecurie_party/models/user.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:ui';

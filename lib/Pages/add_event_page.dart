@@ -1,6 +1,6 @@
 import 'package:ecurie_party/Pages/actualites.dart';
 import 'package:ecurie_party/Pages/calendrier.dart';
-import 'package:ecurie_party/Pages/form_event.dart';
+import 'package:ecurie_party/Pages/event_form/form_event.dart';
 import 'package:ecurie_party/Pages/profil.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
@@ -9,8 +9,8 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:ecurie_party/Pages/calendrier.dart';
 
-import 'form_concours.dart';
-import 'form_cours.dart';
+import 'event_form/form_concours.dart';
+import 'event_form/form_cours.dart';
 
 class add_event_page extends StatefulWidget {
   @override

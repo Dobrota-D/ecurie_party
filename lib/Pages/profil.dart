@@ -7,7 +7,7 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'add_event_page.dart';
-import 'form_cours.dart';
+import 'event_form/form_cours.dart';
 
 class profil extends StatefulWidget {
   @override

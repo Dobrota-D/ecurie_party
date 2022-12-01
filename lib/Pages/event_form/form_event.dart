@@ -3,20 +3,23 @@ import 'package:ecurie_party/Pages/profil.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:ui';
-import 'package:flutter/cupertino.dart';
 
 import 'package:intl/intl.dart';
-import 'add_event_page.dart';
-import 'calendrier.dart';
+import 'package:flutter/cupertino.dart';
 
-class form_cours extends StatefulWidget {
+import '../add_event_page.dart';
+import '../calendrier.dart';
+
+class form_event extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _form_cours();
+    return _form_event();
   }
 }
 
-class _form_cours extends State<form_cours> {
+class _form_event extends State<form_event> {
+
+
   final ValueNotifier<DateTime?> dateSub = ValueNotifier(null);
   final ValueNotifier<DateTime?> longDateSub = ValueNotifier(null);
   final ValueNotifier<TimeOfDay?> timeSub = ValueNotifier(null);
@@ -24,14 +27,19 @@ class _form_cours extends State<form_cours> {
   final TextEditingController meetingName = TextEditingController();
   final TextEditingController meetingLink = TextEditingController();
 
+
+  TextEditingController EventNameController = TextEditingController();
+
   Color _colorFond = const Color(0xFFFFF3E0);
   Color _colorButton = const Color(0xFF730800);
   Color _colorBottumNavBar = const Color(0xFF8D6E63);
 
   final _formKey = GlobalKey<FormState>();
-  TextEditingController EventNameController = TextEditingController();
+  TextEditingController NameController = TextEditingController();
+  TextEditingController FirstnameController = TextEditingController();
+  TextEditingController MailController = TextEditingController();
 
-  String _dropDownDiscipline = "Discipline";
+  String _dropDownEvent = "Type de soirée";
   String _dropDownLieux = "Lieux";
 
   @override
@@ -43,10 +51,11 @@ class _form_cours extends State<form_cours> {
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
+          // <-- SCAFFOLD WITH TRANSPARENT BG
           appBar: AppBar(
               backgroundColor: _colorButton,
               centerTitle: true,
-              title: Text('Créer un cours')),
+              title: Text('Créer un évènement')),
           bottomNavigationBar: BottomAppBar(
             color: _colorFond,
             // <-- APPBAR WITH TRANSPARENT BG
@@ -113,26 +122,11 @@ class _form_cours extends State<form_cours> {
               ],
             ),
           ),
+
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  '.',
-                  style: TextStyle(
-                    fontSize: 1,
-                    fontFamily: 'PressStart',
-                    color: Colors.white,
-                  ),
-                ),
-                const Text(
-                  'Ajouter un cours',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 30,
-                  ),
-                ),
-
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
@@ -151,77 +145,96 @@ class _form_cours extends State<form_cours> {
                     },
                   ),
                 ),
-            Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: ValueListenableBuilder<DateTime?>(
-                    valueListenable: dateSub,
-                    builder: (context, dateVal, child) {
-                      return InkWell(
-                          onTap: () async {
-                            DateTime? date = await showDatePicker(
+                Padding(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      border: UnderlineInputBorder(),
+                      fillColor: _colorButton,
+                      labelText: 'Adresse',
+                    ),
+                    controller: EventNameController,
+                    validator: (textMail) {
+                      if (textMail!.isEmpty) {
+                        return 'Veuillez saisir un texte';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+
+                Padding(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: ValueListenableBuilder<DateTime?>(
+                      valueListenable: dateSub,
+                      builder: (context, dateVal, child) {
+                        return InkWell(
+                            onTap: () async {
+                              DateTime? date = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime.now(),
+                                  lastDate: DateTime(2050),
+                                  currentDate: DateTime.now(),
+                                  initialEntryMode: DatePickerEntryMode.calendar,
+                                  initialDatePickerMode: DatePickerMode.day,
+                                  builder: (context, child) {
+                                    return Theme(
+                                      data: Theme.of(context).copyWith(
+                                          colorScheme: ColorScheme.light(
+                                            primary: Colors.blueGrey,
+                                            // onSurface: AppColors.blackCoffee,
+                                          )),
+                                      child: child!,
+                                    );
+                                  });
+                              dateSub.value = date;
+                            },
+                            child: buildDateTimePicker(
+                                dateVal != null ? convertDate(dateVal) : ''));
+                      }),
+                ),
+                Padding(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: ValueListenableBuilder<TimeOfDay?>(
+                      valueListenable: timeSubShort,
+                      builder: (context, timeVal, child) {
+                        return InkWell(
+                            onTap: () async {
+                              TimeOfDay? time = await showTimePicker(
                                 context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime.now(),
-                                lastDate: DateTime(2050),
-                                currentDate: DateTime.now(),
-                                initialEntryMode: DatePickerEntryMode.calendar,
-                                initialDatePickerMode: DatePickerMode.day,
                                 builder: (context, child) {
                                   return Theme(
-                                    data: Theme.of(context).copyWith(
-                                        colorScheme: ColorScheme.light(
-                                          primary: Colors.blueGrey,
-                                          // onSurface: AppColors.blackCoffee,
-                                        )),
+                                    data: Theme.of(context),
                                     child: child!,
                                   );
-                                });
-                            dateSub.value = date;
-                          },
-                          child: buildDateTimePicker(
-                              dateVal != null ? convertDate(dateVal) : ''));
-                    }),
-            ),
-            Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: ValueListenableBuilder<TimeOfDay?>(
-                    valueListenable: timeSubShort,
-                    builder: (context, timeVal, child) {
-                      return InkWell(
-                          onTap: () async {
-                            TimeOfDay? time = await showTimePicker(
-                              context: context,
-                              builder: (context, child) {
-                                return Theme(
-                                  data: Theme.of(context),
-                                  child: child!,
-                                );
-                              },
-                              initialTime: TimeOfDay.now(),
-                            );
-                            timeSubShort.value = time;
-                          },
-                          child: buildDateTimePicker(timeVal != null
-                              ? convertTime(timeVal)
-                              : ''));
-                    }),
-            ),
+                                },
+                                initialTime: TimeOfDay.now(),
+                              );
+                              timeSubShort.value = time;
+                            },
+                            child: buildDateTimePicker(timeVal != null
+                                ? convertTime(timeVal)
+                                : ''));
+                      }),
+                ),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child: DropdownButton(
-                      hint: _dropDownDiscipline == null
-                          ? Text('Discipline')
+                      hint: _dropDownEvent == null
+                          ? Text('Type de soirée')
                           : Text(
-                              _dropDownDiscipline,
+                        _dropDownEvent,
                               style: TextStyle(color: Colors.blue),
                             ),
                       isExpanded: true,
                       iconSize: 30.0,
                       style: TextStyle(color: Colors.blue),
-                      items: ['Endurance', 'Entretient', 'Grand galop'].map(
+                      items: ['Convention', 'Apéro', 'Repas'].map(
                         (val) {
                           return DropdownMenuItem<String>(
                             value: val,
@@ -232,40 +245,12 @@ class _form_cours extends State<form_cours> {
                       onChanged: (val) {
                         setState(
                           () {
-                            _dropDownDiscipline = val!;
+                            _dropDownEvent = val!;
                           },
                         );
                       }),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: DropdownButton(
-                      hint: _dropDownLieux == null
-                          ? Text('Lieu')
-                          : Text(
-                              _dropDownLieux,
-                              style: TextStyle(color: Colors.blue),
-                            ),
-                      isExpanded: true,
-                      iconSize: 30.0,
-                      style: TextStyle(color: Colors.blue),
-                      items: ['Cergy', 'Conflans', 'Pontoise'].map(
-                        (val) {
-                          return DropdownMenuItem<String>(
-                            value: val,
-                            child: Text(val),
-                          );
-                        },
-                      ).toList(),
-                      onChanged: (val) {
-                        setState(
-                          () {
-                            _dropDownLieux = val!;
-                          },
-                        );
-                      }),
-                ),
+
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -281,7 +266,7 @@ class _form_cours extends State<form_cours> {
                     shadowColor: Colors.transparent.withOpacity(0.1),
                   ),
                   child: Text(
-                    "Créer un cours",
+                    "Créer un évènement",
                     style: TextStyle(
                       color: _colorButton,
                       fontSize: 22,
