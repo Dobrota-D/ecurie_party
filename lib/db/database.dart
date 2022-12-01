@@ -42,17 +42,17 @@ var status = db.serverStatus();
     //print(await collection.find().toList());
  */
 class DataBase {
-  String user;
-  String pwd;
-  String host;
-  String dbName;
+  String _user;
+  String _pwd;
+  String _host;
+  String _dbName;
 
   var db;
 
-  DataBase(this.user, this.pwd, this.host, this.dbName);
+  DataBase(this._user, this._pwd, this._host, this._dbName);
 
   _init() async {
-    db = await Db.create("mongodb+srv://$user:$pwd@$host/$dbName?retryWrites=true&w=majority");
+    db = await Db.create("mongodb+srv://$_user:$_pwd@$_host/$_dbName?retryWrites=true&w=majority");
     await db.open();
   }
 

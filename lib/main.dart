@@ -12,19 +12,11 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  static final myDb = DataBase("dbAdmin", "dbAdminPassword", "cluster0.oljmo2v.mongodb.net", "");
-
-  dbCall() async {
-    var userList = await myDb.getCollection("users");
-    print(userList);
-
-    print(Log(1, DateTime.now(), "Test", "ttestsets").toJson());
-  }
+  static final DataBase myDb = DataBase("dbAdmin", "dbAdminPassword", "cluster0.oljmo2v.mongodb.net", "");
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    dbCall();
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
