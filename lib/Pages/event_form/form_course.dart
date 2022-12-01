@@ -21,28 +21,26 @@ class FormCourse extends StatefulWidget {
 }
 
 class _FormCourse extends State<FormCourse> with EventForm {
-
   TextEditingController eventNameController = TextEditingController();
 
   String _dropDownDiscipline = "Discipline";
-  String _dropDownLocation = "Lieux";
+  String _dropDownLocation = "Adresse";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
-          backgroundColor: buttonColor,
-          centerTitle: true,
-          title: const Text('Organiser un cours')),
+        backgroundColor: buttonColor,
+        centerTitle: true,
+        title: const Text('Organiser un cours')),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: TextFormField(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextFormField(
                 decoration: InputDecoration(
                   border: const UnderlineInputBorder(),
                   fillColor: buttonColor,
@@ -56,74 +54,60 @@ class _FormCourse extends State<FormCourse> with EventForm {
                   return null;
                 },
               ),
-            ),
-        Padding(
-          padding:
-          const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            child: ValueListenableBuilder<DateTime?>(
-                valueListenable: dateSub,
-                builder: (context, dateVal, child) {
-                  return InkWell(
-                      onTap: () async {
-                        DateTime? date = await showDatePicker(
+              ValueListenableBuilder<DateTime?>(
+                  valueListenable: dateSub,
+                  builder: (context, dateVal, child) {
+                    return InkWell(
+                        onTap: () async {
+                          DateTime? date = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime.now(),
+                              lastDate: DateTime(2050),
+                              currentDate: DateTime.now(),
+                              initialEntryMode:
+                                  DatePickerEntryMode.calendar,
+                              initialDatePickerMode: DatePickerMode.day,
+                              builder: (context, child) {
+                                return Theme(
+                                  data: Theme.of(context).copyWith(
+                                      colorScheme: const ColorScheme.light(
+                                    primary: Colors.blueGrey,
+                                    // onSurface: AppColors.blackCoffee,
+                                  )),
+                                  child: child!,
+                                );
+                              });
+                          dateSub.value = date;
+                        },
+                        child: buildDateTimePicker(
+                            dateVal != null ? convertDate(dateVal) : ''));
+                  }),
+              ValueListenableBuilder<TimeOfDay?>(
+                  valueListenable: timeSubShort,
+                  builder: (context, timeVal, child) {
+                    return InkWell(
+                        onTap: () async {
+                          TimeOfDay? time = await showTimePicker(
                             context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime.now(),
-                            lastDate: DateTime(2050),
-                            currentDate: DateTime.now(),
-                            initialEntryMode: DatePickerEntryMode.calendar,
-                            initialDatePickerMode: DatePickerMode.day,
                             builder: (context, child) {
                               return Theme(
-                                data: Theme.of(context).copyWith(
-                                    colorScheme: const ColorScheme.light(
-                                      primary: Colors.blueGrey,
-                                      // onSurface: AppColors.blackCoffee,
-                                    )),
+                                data: Theme.of(context),
                                 child: child!,
                               );
-                            });
-                        dateSub.value = date;
-                      },
-                      child: buildDateTimePicker(
-                          dateVal != null ? convertDate(dateVal) : ''));
-                }),
-        ),
-        Padding(
-          padding:
-          const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            child: ValueListenableBuilder<TimeOfDay?>(
-                valueListenable: timeSubShort,
-                builder: (context, timeVal, child) {
-                  return InkWell(
-                      onTap: () async {
-                        TimeOfDay? time = await showTimePicker(
-                          context: context,
-                          builder: (context, child) {
-                            return Theme(
-                              data: Theme.of(context),
-                              child: child!,
-                            );
-                          },
-                          initialTime: TimeOfDay.now(),
-                        );
-                        timeSubShort.value = time;
-                      },
-                      child: buildDateTimePicker(timeVal != null
-                          ? convertTime(timeVal)
-                          : ''));
-                }),
-        ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: DropdownButton(
-                  hint: _dropDownDiscipline == null
-                      ? const Text('Discipline')
-                      : Text(
-                          _dropDownDiscipline,
-                          style: const TextStyle(color: Colors.blue),
-                        ),
+                            },
+                            initialTime: TimeOfDay.now(),
+                          );
+                          timeSubShort.value = time;
+                        },
+                        child: buildDateTimePicker(
+                            timeVal != null ? convertTime(timeVal) : ''));
+                  }),
+              DropdownButton(
+                  hint: Text(
+                    _dropDownDiscipline,
+                    style: const TextStyle(color: Colors.blue),
+                  ),
                   isExpanded: true,
                   iconSize: 30.0,
                   style: const TextStyle(color: Colors.blue),
@@ -142,17 +126,11 @@ class _FormCourse extends State<FormCourse> with EventForm {
                       },
                     );
                   }),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: DropdownButton(
-                  hint: _dropDownLocation == null
-                    ? const Text('Lieu')
-                    : Text(
-                        _dropDownLocation,
-                        style: const TextStyle(color: Colors.blue),
-                      ),
+              DropdownButton(
+                  hint: Text(
+                    _dropDownLocation,
+                    style: const TextStyle(color: Colors.blue),
+                  ),
                   isExpanded: true,
                   iconSize: 30.0,
                   style: const TextStyle(color: Colors.blue),
@@ -171,32 +149,11 @@ class _FormCourse extends State<FormCourse> with EventForm {
                       },
                     );
                   }),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                        pageBuilder: (_, __, ___) => actualites()));
-                // do something
-
-                // accéder au fil d'actu
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Colors.transparent,
-                shadowColor: Colors.transparent.withOpacity(0.1),
-              ),
-              child: Text(
-                "Finaliser",
-                style: TextStyle(
-                  color: buttonColor,
-                  fontSize: 22,
-                ),
-              ),
-            ),
-          ],
+              submitButton(context),
+            ],
+          )
         ),
-      ),
+      )
     );
   }
 }

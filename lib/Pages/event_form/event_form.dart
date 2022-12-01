@@ -1,5 +1,8 @@
+import 'package:ecurie_party/tools/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import '../actualites.dart';
 
 class EventForm{
  final ValueNotifier<DateTime?> dateSub = ValueNotifier(null);
@@ -34,5 +37,27 @@ class EventForm{
        // color: AppColors.eggPlant,
      ),
    );
+ }
+ Widget submitButton(BuildContext context){
+  return ElevatedButton(
+    onPressed: () {
+      Navigator.push(
+          context,
+          PageRouteBuilder(
+              pageBuilder: (_, __, ___) => actualites()));
+      // accéder au fil d'actu
+    },
+    style: ElevatedButton.styleFrom(
+      primary: Colors.transparent,
+      shadowColor: Colors.transparent.withOpacity(0.1),
+    ),
+    child: Text(
+      "Finaliser",
+      style: TextStyle(
+        color: buttonColor,
+        fontSize: 22,
+      ),
+    ),
+  );
  }
 }

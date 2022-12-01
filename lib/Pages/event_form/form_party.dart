@@ -41,113 +41,93 @@ class _FormParty extends State<FormParty> with EventForm {
           title: const Text('Organiser une soirée')),
 
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  border: const UnderlineInputBorder(),
-                  fillColor: buttonColor,
-                  labelText: 'Nom de l\'évènement',
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextFormField(
+                  decoration: InputDecoration(
+                    border: const UnderlineInputBorder(),
+                    fillColor: buttonColor,
+                    labelText: 'Nom de l\'évènement',
+                  ),
+                  controller: eventNameController,
+                  validator: (textMail) {
+                    if (textMail!.isEmpty) {
+                      return 'Veuillez saisir un texte';
+                    }
+                    return null;
+                  },
                 ),
-                controller: eventNameController,
-                validator: (textMail) {
-                  if (textMail!.isEmpty) {
-                    return 'Veuillez saisir un texte';
-                  }
-                  return null;
-                },
-              ),
-            ),
-            Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  border: const UnderlineInputBorder(),
-                  fillColor: buttonColor,
-                  labelText: 'Adresse',
+              TextFormField(
+                  decoration: InputDecoration(
+                    border: const UnderlineInputBorder(),
+                    fillColor: buttonColor,
+                    labelText: 'Adresse',
+                  ),
+                  controller: eventNameController,
+                  validator: (textMail) {
+                    if (textMail!.isEmpty) {
+                      return 'Veuillez saisir un texte';
+                    }
+                    return null;
+                  },
                 ),
-                controller: eventNameController,
-                validator: (textMail) {
-                  if (textMail!.isEmpty) {
-                    return 'Veuillez saisir un texte';
-                  }
-                  return null;
-                },
-              ),
-            ),
-
-            Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: ValueListenableBuilder<DateTime?>(
-                  valueListenable: dateSub,
-                  builder: (context, dateVal, child) {
-                    return InkWell(
-                        onTap: () async {
-                          DateTime? date = await showDatePicker(
+              ValueListenableBuilder<DateTime?>(
+                    valueListenable: dateSub,
+                    builder: (context, dateVal, child) {
+                      return InkWell(
+                          onTap: () async {
+                            DateTime? date = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime.now(),
+                                lastDate: DateTime(2050),
+                                currentDate: DateTime.now(),
+                                initialEntryMode: DatePickerEntryMode.calendar,
+                                initialDatePickerMode: DatePickerMode.day,
+                                builder: (context, child) {
+                                  return Theme(
+                                    data: Theme.of(context).copyWith(
+                                        colorScheme: const ColorScheme.light(
+                                          primary: Colors.blueGrey,
+                                          // onSurface: AppColors.blackCoffee,
+                                        )),
+                                    child: child!,
+                                  );
+                                });
+                            dateSub.value = date;
+                          },
+                          child: buildDateTimePicker(
+                              dateVal != null ? convertDate(dateVal) : ''));
+                    }),
+              ValueListenableBuilder<TimeOfDay?>(
+                    valueListenable: timeSubShort,
+                    builder: (context, timeVal, child) {
+                      return InkWell(
+                          onTap: () async {
+                            TimeOfDay? time = await showTimePicker(
                               context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime.now(),
-                              lastDate: DateTime(2050),
-                              currentDate: DateTime.now(),
-                              initialEntryMode: DatePickerEntryMode.calendar,
-                              initialDatePickerMode: DatePickerMode.day,
                               builder: (context, child) {
                                 return Theme(
-                                  data: Theme.of(context).copyWith(
-                                      colorScheme: const ColorScheme.light(
-                                        primary: Colors.blueGrey,
-                                        // onSurface: AppColors.blackCoffee,
-                                      )),
+                                  data: Theme.of(context),
                                   child: child!,
                                 );
-                              });
-                          dateSub.value = date;
-                        },
-                        child: buildDateTimePicker(
-                            dateVal != null ? convertDate(dateVal) : ''));
-                  }),
-            ),
-            Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: ValueListenableBuilder<TimeOfDay?>(
-                  valueListenable: timeSubShort,
-                  builder: (context, timeVal, child) {
-                    return InkWell(
-                        onTap: () async {
-                          TimeOfDay? time = await showTimePicker(
-                            context: context,
-                            builder: (context, child) {
-                              return Theme(
-                                data: Theme.of(context),
-                                child: child!,
-                              );
-                            },
-                            initialTime: TimeOfDay.now(),
-                          );
-                          timeSubShort.value = time;
-                        },
-                        child: buildDateTimePicker(timeVal != null
-                            ? convertTime(timeVal)
-                            : ''));
-                  }),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: DropdownButton(
-                  hint: _dropDownEvent == null
-                      ? const Text('Type de soirée')
-                      : Text(
+                              },
+                              initialTime: TimeOfDay.now(),
+                            );
+                            timeSubShort.value = time;
+                          },
+                          child: buildDateTimePicker(timeVal != null
+                              ? convertTime(timeVal)
+                              : ''));
+                    }),
+              DropdownButton(
+                  hint: Text(
                     _dropDownEvent,
-                          style: const TextStyle(color: Colors.blue),
-                        ),
+                    style: const TextStyle(color: Colors.blue),
+                  ),
                   isExpanded: true,
                   iconSize: 30.0,
                   style: const TextStyle(color: Colors.blue),
@@ -166,33 +146,11 @@ class _FormParty extends State<FormParty> with EventForm {
                       },
                     );
                   }),
-            ),
-
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                        pageBuilder: (_, __, ___) => actualites()));
-                // do something
-
-                // accéder au fil d'actu
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Colors.transparent,
-                shadowColor: Colors.transparent.withOpacity(0.1),
-              ),
-              child: Text(
-                "Finaliser",
-                style: TextStyle(
-                  color: buttonColor,
-                  fontSize: 22,
-                ),
-              ),
-            ),
-          ],
+              submitButton(context),
+            ],
+          ),
         ),
-      ),
+      )
     );
   }
 }
