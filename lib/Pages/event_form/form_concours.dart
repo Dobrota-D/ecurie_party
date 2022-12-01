@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../add_event_page.dart';
 import '../calendrier.dart';
+import 'event_form.dart';
 
 class form_concours extends StatefulWidget {
   @override
@@ -16,11 +17,8 @@ class form_concours extends StatefulWidget {
   }
 }
 
-class _form_concours extends State<form_concours> {
-  final ValueNotifier<DateTime?> dateSub = ValueNotifier(null);
-  final ValueNotifier<TimeOfDay?> timeSubShort = ValueNotifier(null);
+class _form_concours extends State<form_concours> with EventForm {
 
-  final _formKey = GlobalKey<FormState>();
   TextEditingController eventNameController = TextEditingController();
   TextEditingController eventImageController = TextEditingController();
 
@@ -31,8 +29,6 @@ class _form_concours extends State<form_concours> {
 
   @override
   Widget build(BuildContext context) {
-
-    
 
     bool? check1 = false;
     bool? check2 = false;
@@ -294,35 +290,6 @@ class _form_concours extends State<form_concours> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  String convertDate(DateTime dateTime) {
-    return DateFormat('dd/MM/yyyy').format(dateTime);
-  }
-
-  String longDate(DateTime dateTime) {
-    return DateFormat('EEE, MMM d, yyy').format(dateTime);
-  }
-
-  String convertTime(TimeOfDay timeOfDay) {
-    DateTime tempDate = DateFormat('hh:mm')
-        .parse(timeOfDay.hour.toString() + ':' + timeOfDay.minute.toString());
-    var dateFormat = DateFormat('h:mm a');
-    return dateFormat.format(tempDate);
-  }
-
-  Widget buildDateTimePicker(String data) {
-    return ListTile(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-        side: BorderSide(color: Colors.black, width: 1.5),
-      ),
-      title: Text(data),
-      trailing: const Icon(
-        Icons.calendar_today,
-        // color: AppColors.eggPlant,
       ),
     );
   }

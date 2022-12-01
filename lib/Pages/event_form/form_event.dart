@@ -1,5 +1,7 @@
 import 'package:ecurie_party/Pages/actualites.dart';
+import 'package:ecurie_party/Pages/event_form/event_form.dart';
 import 'package:ecurie_party/Pages/profil.dart';
+import 'package:ecurie_party/tools/constants.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:ui';
@@ -17,24 +19,9 @@ class form_event extends StatefulWidget {
   }
 }
 
-class _form_event extends State<form_event> {
-
-
-  final ValueNotifier<DateTime?> dateSub = ValueNotifier(null);
-  final ValueNotifier<DateTime?> longDateSub = ValueNotifier(null);
-  final ValueNotifier<TimeOfDay?> timeSub = ValueNotifier(null);
-  final ValueNotifier<TimeOfDay?> timeSubShort = ValueNotifier(null);
-  final TextEditingController meetingName = TextEditingController();
-  final TextEditingController meetingLink = TextEditingController();
-
-
+class _form_event extends State<form_event> with EventForm {
   TextEditingController EventNameController = TextEditingController();
 
-  Color _colorFond = const Color(0xFFFFF3E0);
-  Color _colorButton = const Color(0xFF730800);
-  Color _colorBottumNavBar = const Color(0xFF8D6E63);
-
-  final _formKey = GlobalKey<FormState>();
   TextEditingController NameController = TextEditingController();
   TextEditingController FirstnameController = TextEditingController();
   TextEditingController MailController = TextEditingController();
@@ -47,28 +34,28 @@ class _form_event extends State<form_event> {
     return Stack(
       children: [
         Container(
-          decoration: BoxDecoration(color: _colorFond),
+          decoration: BoxDecoration(color: backgroundColor),
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
           // <-- SCAFFOLD WITH TRANSPARENT BG
           appBar: AppBar(
-              backgroundColor: _colorButton,
+              backgroundColor: buttonColor,
               centerTitle: true,
-              title: Text('Créer un évènement')),
+              title: const Text('Créer un évènement')),
           bottomNavigationBar: BottomAppBar(
-            color: _colorFond,
+            color: backgroundColor,
             // <-- APPBAR WITH TRANSPARENT BG
             elevation: 0,
 
-            child: new Row(
+            child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 IconButton(
                   icon: Icon(
                     Icons.article,size: 40,
-                    color: _colorBottumNavBar,
+                    color: buttonNavBarColor,
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -81,7 +68,7 @@ class _form_event extends State<form_event> {
                 IconButton(
                   icon: Icon(
                     Icons.add,size: 40,
-                    color: _colorBottumNavBar,
+                    color: buttonNavBarColor,
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -95,7 +82,7 @@ class _form_event extends State<form_event> {
                 IconButton(
                   icon: Icon(
                     Icons.calendar_month,size: 40,
-                    color: _colorBottumNavBar,
+                    color: buttonNavBarColor,
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -108,7 +95,7 @@ class _form_event extends State<form_event> {
                 IconButton(
                   icon: Icon(
                     Icons.face,
-                    color: _colorBottumNavBar,size: 40,
+                    color: buttonNavBarColor,size: 40,
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -132,8 +119,8 @@ class _form_event extends State<form_event> {
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child: TextFormField(
                     decoration: InputDecoration(
-                      border: UnderlineInputBorder(),
-                      fillColor: _colorButton,
+                      border: const UnderlineInputBorder(),
+                      fillColor: buttonColor,
                       labelText: 'Nom de l\'évènement',
                     ),
                     controller: EventNameController,
@@ -150,8 +137,8 @@ class _form_event extends State<form_event> {
                   const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child: TextFormField(
                     decoration: InputDecoration(
-                      border: UnderlineInputBorder(),
-                      fillColor: _colorButton,
+                      border: const UnderlineInputBorder(),
+                      fillColor: buttonColor,
                       labelText: 'Adresse',
                     ),
                     controller: EventNameController,
@@ -183,7 +170,7 @@ class _form_event extends State<form_event> {
                                   builder: (context, child) {
                                     return Theme(
                                       data: Theme.of(context).copyWith(
-                                          colorScheme: ColorScheme.light(
+                                          colorScheme: const ColorScheme.light(
                                             primary: Colors.blueGrey,
                                             // onSurface: AppColors.blackCoffee,
                                           )),
@@ -226,14 +213,14 @@ class _form_event extends State<form_event> {
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child: DropdownButton(
                       hint: _dropDownEvent == null
-                          ? Text('Type de soirée')
+                          ? const Text('Type de soirée')
                           : Text(
                         _dropDownEvent,
-                              style: TextStyle(color: Colors.blue),
+                              style: const TextStyle(color: Colors.blue),
                             ),
                       isExpanded: true,
                       iconSize: 30.0,
-                      style: TextStyle(color: Colors.blue),
+                      style: const TextStyle(color: Colors.blue),
                       items: ['Convention', 'Apéro', 'Repas'].map(
                         (val) {
                           return DropdownMenuItem<String>(
@@ -268,7 +255,7 @@ class _form_event extends State<form_event> {
                   child: Text(
                     "Créer un évènement",
                     style: TextStyle(
-                      color: _colorButton,
+                      color: buttonColor,
                       fontSize: 22,
                     ),
                   ),
@@ -278,35 +265,6 @@ class _form_event extends State<form_event> {
           ),
         )
       ],
-    );
-  }
-
-  String convertDate(DateTime dateTime) {
-    return DateFormat('dd/MM/yyyy').format(dateTime);
-  }
-
-  String longDate(DateTime dateTime) {
-    return DateFormat('EEE, MMM d, yyy').format(dateTime);
-  }
-
-  String convertTime(TimeOfDay timeOfDay) {
-    DateTime tempDate = DateFormat('hh:mm')
-        .parse(timeOfDay.hour.toString() + ':' + timeOfDay.minute.toString());
-    var dateFormat = DateFormat('h:mm a');
-    return dateFormat.format(tempDate);
-  }
-
-  Widget buildDateTimePicker(String data) {
-    return ListTile(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-        side: BorderSide(color: Colors.black, width: 1.5),
-      ),
-      title: Text(data),
-      trailing: const Icon(
-        Icons.calendar_today,
-        // color: AppColors.eggPlant,
-      ),
     );
   }
 }
