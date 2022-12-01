@@ -11,16 +11,18 @@ import 'package:intl/intl.dart';
 import '../add_event_page.dart';
 import '../calendrier.dart';
 
-class form_cours extends StatefulWidget {
+class FormCourse extends StatefulWidget {
+  const FormCourse({super.key});
+
   @override
   State<StatefulWidget> createState() {
-    return _form_cours();
+    return _FormCourse();
   }
 }
 
-class _form_cours extends State<form_cours> with EventForm {
+class _FormCourse extends State<FormCourse> with EventForm {
 
-  TextEditingController EventNameController = TextEditingController();
+  TextEditingController eventNameController = TextEditingController();
 
   String _dropDownDiscipline = "Discipline";
   String _dropDownLieux = "Lieux";
@@ -37,93 +39,11 @@ class _form_cours extends State<form_cours> with EventForm {
           appBar: AppBar(
               backgroundColor: buttonColor,
               centerTitle: true,
-              title: const Text('Créer un cours')),
-          bottomNavigationBar: BottomAppBar(
-            color: backgroundColor,
-            // <-- APPBAR WITH TRANSPARENT BG
-            elevation: 0,
-
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                IconButton(
-                  icon: Icon(
-                    Icons.article,size: 40,
-                    color: buttonNavBarColor,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => actualites()));
-                    // do something
-                  },
-                ),
-                IconButton(
-                  icon: Icon(
-                    Icons.add,size: 40,
-                    color: buttonNavBarColor,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => add_event_page()));
-                    // do something
-                  },
-                ),
-
-                IconButton(
-                  icon: Icon(
-                    Icons.calendar_month, size: 40,
-                    color: buttonNavBarColor,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => calendrier()));
-                    // do something
-                  },
-                ),
-                IconButton(
-                  icon: Icon(
-                    Icons.face,
-                    color: buttonNavBarColor, size: 40,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => profil()));
-                    // do something
-                  },
-                ),
-                // IconButton(icon: Icon(Icons.search), onPressed: () {},),
-              ],
-            ),
-          ),
+              title: const Text('Organiser un cours')),
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  '.',
-                  style: TextStyle(
-                    fontSize: 1,
-                    fontFamily: 'PressStart',
-                    color: Colors.white,
-                  ),
-                ),
-                const Text(
-                  'Ajouter un cours',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 30,
-                  ),
-                ),
-
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
@@ -133,7 +53,7 @@ class _form_cours extends State<form_cours> with EventForm {
                       fillColor: buttonColor,
                       labelText: 'Nom de l\'évènement',
                     ),
-                    controller: EventNameController,
+                    controller: eventNameController,
                     validator: (textMail) {
                       if (textMail!.isEmpty) {
                         return 'Veuillez saisir un texte';
@@ -272,7 +192,7 @@ class _form_cours extends State<form_cours> with EventForm {
                     shadowColor: Colors.transparent.withOpacity(0.1),
                   ),
                   child: Text(
-                    "Créer un cours",
+                    "Finaliser",
                     style: TextStyle(
                       color: buttonColor,
                       fontSize: 22,

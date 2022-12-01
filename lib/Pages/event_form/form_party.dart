@@ -12,19 +12,21 @@ import 'package:flutter/cupertino.dart';
 import '../add_event_page.dart';
 import '../calendrier.dart';
 
-class form_event extends StatefulWidget {
+class FormParty extends StatefulWidget {
+  const FormParty({super.key});
+
   @override
   State<StatefulWidget> createState() {
-    return _form_event();
+    return _FormParty();
   }
 }
 
-class _form_event extends State<form_event> with EventForm {
-  TextEditingController EventNameController = TextEditingController();
+class _FormParty extends State<FormParty> with EventForm {
+  TextEditingController eventNameController = TextEditingController();
 
-  TextEditingController NameController = TextEditingController();
-  TextEditingController FirstnameController = TextEditingController();
-  TextEditingController MailController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController firstnameController = TextEditingController();
+  TextEditingController mailController = TextEditingController();
 
   String _dropDownEvent = "Type de soirée";
   String _dropDownLieux = "Lieux";
@@ -42,73 +44,7 @@ class _form_event extends State<form_event> with EventForm {
           appBar: AppBar(
               backgroundColor: buttonColor,
               centerTitle: true,
-              title: const Text('Créer un évènement')),
-          bottomNavigationBar: BottomAppBar(
-            color: backgroundColor,
-            // <-- APPBAR WITH TRANSPARENT BG
-            elevation: 0,
-
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                IconButton(
-                  icon: Icon(
-                    Icons.article,size: 40,
-                    color: buttonNavBarColor,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => actualites()));
-                    // do something
-                  },
-                ),
-                IconButton(
-                  icon: Icon(
-                    Icons.add,size: 40,
-                    color: buttonNavBarColor,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => add_event_page()));
-                    // do something
-                  },
-                ),
-
-                IconButton(
-                  icon: Icon(
-                    Icons.calendar_month,size: 40,
-                    color: buttonNavBarColor,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => calendrier()));
-                    // do something
-                  },
-                ),
-                IconButton(
-                  icon: Icon(
-                    Icons.face,
-                    color: buttonNavBarColor,size: 40,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => profil()));
-                    // do something
-                  },
-                ),
-                // IconButton(icon: Icon(Icons.search), onPressed: () {},),
-              ],
-            ),
-          ),
+              title: const Text('Organiser une soirée')),
 
           body: Center(
             child: Column(
@@ -123,7 +59,7 @@ class _form_event extends State<form_event> with EventForm {
                       fillColor: buttonColor,
                       labelText: 'Nom de l\'évènement',
                     ),
-                    controller: EventNameController,
+                    controller: eventNameController,
                     validator: (textMail) {
                       if (textMail!.isEmpty) {
                         return 'Veuillez saisir un texte';
@@ -141,7 +77,7 @@ class _form_event extends State<form_event> with EventForm {
                       fillColor: buttonColor,
                       labelText: 'Adresse',
                     ),
-                    controller: EventNameController,
+                    controller: eventNameController,
                     validator: (textMail) {
                       if (textMail!.isEmpty) {
                         return 'Veuillez saisir un texte';
@@ -253,7 +189,7 @@ class _form_event extends State<form_event> with EventForm {
                     shadowColor: Colors.transparent.withOpacity(0.1),
                   ),
                   child: Text(
-                    "Créer un évènement",
+                    "Finaliser",
                     style: TextStyle(
                       color: buttonColor,
                       fontSize: 22,

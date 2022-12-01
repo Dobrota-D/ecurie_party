@@ -10,14 +10,14 @@ import '../add_event_page.dart';
 import '../calendrier.dart';
 import 'event_form.dart';
 
-class form_concours extends StatefulWidget {
+class FormTournament extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _form_concours();
+    return _FormTournament();
   }
 }
 
-class _form_concours extends State<form_concours> with EventForm {
+class _FormTournament extends State<FormTournament> with EventForm {
 
   TextEditingController eventNameController = TextEditingController();
   TextEditingController eventImageController = TextEditingController();
@@ -40,73 +40,7 @@ class _form_concours extends State<form_concours> with EventForm {
       appBar: AppBar(
           backgroundColor: buttonColor,
           centerTitle: true,
-          title: const Text('Créer une compétition')),
-      bottomNavigationBar: BottomAppBar(
-        color: backgroundColor,
-        // <-- APPBAR WITH TRANSPARENT BG
-        elevation: 0,
-
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.article,size: 40,
-                color: buttonNavBarColor,
-              ),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                        pageBuilder: (_, __, ___) => actualites()));
-                // do something
-              },
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.add,size: 40,
-                color: buttonNavBarColor,
-              ),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                        pageBuilder: (_, __, ___) => add_event_page()));
-                // do something
-              },
-            ),
-
-            IconButton(
-              icon: Icon(
-                Icons.calendar_month,size: 40,
-                color: buttonNavBarColor,
-              ),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                        pageBuilder: (_, __, ___) => calendrier()));
-                // do something
-              },
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.face,
-                color: buttonNavBarColor,size: 40,
-              ),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                        pageBuilder: (_, __, ___) => profil()));
-                // do something
-              },
-            ),
-            // IconButton(icon: Icon(Icons.search), onPressed: () {},),
-          ],
-        ),
-      ),
+          title: const Text('Organiser une compétition')),
 
       body: Center(
         child: Column(
@@ -281,7 +215,7 @@ class _form_concours extends State<form_concours> with EventForm {
                 shadowColor: Colors.transparent.withOpacity(0.1),
               ),
               child: Text(
-                "Créer une compétition",
+                "Finaliser",
                 style: TextStyle(
                   color: buttonColor,
                   fontSize: 22,
