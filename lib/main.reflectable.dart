@@ -41,7 +41,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             0,
             0,
             const <int>[],
-            const <Object>[prefix0.reflector],
+            const <Object>[prefix0.collection],
             null)
       ],
       <m.DeclarationMirror>[

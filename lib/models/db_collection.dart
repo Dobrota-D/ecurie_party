@@ -1,14 +1,6 @@
-/// A minimal serialization library, just intended to give an
-/// example of how package:reflectable can be used
-/// Doesn't check for cycles in the serialized data, and is not customizable
-/// at all.
-/// Only serializes public fields.
-library test_reflectable.serialize;
-
-import 'package:ecurie_party/models/log.dart';
 import 'package:reflectable/reflectable.dart';
 
-const reflector = const Serializable();
+const collection = Serializable();
 
 class Serializable extends Reflectable {
   const Serializable()
@@ -17,7 +9,7 @@ class Serializable extends Reflectable {
 
 class DbCollection {
   toJson(){
-    InstanceMirror instanceMirror = reflector.reflect(this);
+    InstanceMirror instanceMirror = collection.reflect(this);
 
     Map<String, dynamic> dataMapped = Map();
 

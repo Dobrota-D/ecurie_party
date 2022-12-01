@@ -1,6 +1,6 @@
 import 'package:ecurie_party/models/db_collection.dart';
 
-@reflector
+@collection
 class User extends DbCollection{
   int id;
   String firstname;

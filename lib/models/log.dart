@@ -1,6 +1,6 @@
 import 'db_collection.dart';
 
-@reflector
+@collection
 class Log extends DbCollection{
   int id;
   DateTime date;

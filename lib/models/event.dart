@@ -1,6 +1,6 @@
 import 'db_collection.dart';
 
-@reflector
+@collection
 class Event extends DbCollection{
   int id;
   String name;
