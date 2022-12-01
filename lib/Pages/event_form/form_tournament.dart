@@ -11,6 +11,8 @@ import '../calendrier.dart';
 import 'event_form.dart';
 
 class FormTournament extends StatefulWidget {
+  const FormTournament({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return _FormTournament();
@@ -22,10 +24,7 @@ class _FormTournament extends State<FormTournament> with EventForm {
   TextEditingController eventNameController = TextEditingController();
   TextEditingController eventImageController = TextEditingController();
 
-  String _dropDownDiscipline = "Discipline";
-  String _dropDownLieux = "Lieux";
-
-  bool value = false;
+  String _dropDownLocation = "Lieux";
 
   @override
   Widget build(BuildContext context) {
@@ -143,10 +142,10 @@ class _FormTournament extends State<FormTournament> with EventForm {
               padding:
                   const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: DropdownButton(
-                  hint: _dropDownLieux == null
+                  hint: _dropDownLocation == null
                       ? const Text('Lieu')
                       : Text(
-                          _dropDownLieux,
+                          _dropDownLocation,
                           style: const TextStyle(color: Colors.blue),
                         ),
                   isExpanded: true,
@@ -163,7 +162,7 @@ class _FormTournament extends State<FormTournament> with EventForm {
                   onChanged: (val) {
                     setState(
                       () {
-                        _dropDownLieux = val!;
+                        _dropDownLocation = val!;
                       },
                     );
                   }),
