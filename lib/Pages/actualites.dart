@@ -1,9 +1,9 @@
-import 'package:app_gestion_ecurie/Pages/add_event_page.dart';
-import 'package:app_gestion_ecurie/Pages/profil.dart';
+import 'package:ecurie_party/Pages/add_event_page.dart';
+import 'package:ecurie_party/Pages/profil.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
-import 'package:app_gestion_ecurie/Pages/calendrier.dart';
+import 'package:ecurie_party/Pages/calendrier.dart';
 import 'cavalier_list.dart';
 import 'cheval_list.dart';
 

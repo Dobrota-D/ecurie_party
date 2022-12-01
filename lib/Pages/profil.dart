@@ -1,7 +1,7 @@
-import 'package:app_gestion_ecurie/Pages/actualites.dart';
-import 'package:app_gestion_ecurie/Pages/calendrier.dart';
-import 'package:app_gestion_ecurie/Pages/login.dart';
-import 'package:app_gestion_ecurie/Pages/profil.dart';
+import 'package:ecurie_party/Pages/actualites.dart';
+import 'package:ecurie_party/Pages/calendrier.dart';
+import 'package:ecurie_party/Pages/login.dart';
+import 'package:ecurie_party/Pages/profil.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:ui';

@@ -1,4 +1,4 @@
-import 'package:app_gestion_ecurie/Pages/actualites.dart';
+import 'package:ecurie_party/Pages/actualites.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:ui';

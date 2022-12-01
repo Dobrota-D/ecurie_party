@@ -1,4 +1,4 @@
-import 'package:app_gestion_ecurie/Pages/profil.dart';
+import 'package:ecurie_party/Pages/profil.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
