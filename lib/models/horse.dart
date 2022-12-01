@@ -1,4 +1,7 @@
-class Horse{
+import 'package:ecurie_party/models/db_collection.dart';
+
+@reflector
+class Horse extends DbCollection{
   int id;
   String name;
   String color;
@@ -6,14 +9,4 @@ class Horse{
   int idUser;
 
   Horse(this.id, this.name, this.color, this.age, this.idUser);
-
-  toJson(){
-    return {
-      "id": id,
-      "name": name,
-      "color": color,
-      "age": age,
-      "idUser": idUser,
-    };
-  }
 }

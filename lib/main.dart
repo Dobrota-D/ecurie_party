@@ -1,7 +1,11 @@
 import 'package:ecurie_party/db/database.dart';
+import 'package:ecurie_party/models/log.dart';
 import 'package:flutter/material.dart';
 
-void main() async {
+import 'main.reflectable.dart';
+
+void main() {
+  initializeReflectable();
   runApp(const MyApp());
 }
 
@@ -12,6 +16,8 @@ class MyApp extends StatelessWidget {
   dbCall() async {
     var userList = await myDb.getCollection("users");
     print(userList);
+
+    print(Log(1, DateTime.now(), "Test", "ttestsets").toJson());
   }
 
   // This widget is the root of your application.
