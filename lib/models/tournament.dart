@@ -8,4 +8,10 @@ class Tournament extends Event{
   List<String> levels;
 
   Tournament(super.id, super.name, super.eventType, super.idUser, super.horsemenList, super.date, super.location, this.photo, this.levels);
+
+  static Tournament init(Map<String, dynamic> data){
+    return Tournament(data["id"], data["name"], data["eventType"],
+        data["idUser"], data["horsemenList"], data["date"], data["location"],
+        data["photo"], data["levels"]);
+  }
 }

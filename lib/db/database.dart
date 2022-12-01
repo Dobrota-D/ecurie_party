@@ -1,10 +1,10 @@
 import 'package:mongo_dart/mongo_dart.dart';
 
 class DataBase {
-  String _user;
-  String _pwd;
-  String _host;
-  String _dbName;
+  final String _user;
+  final String _pwd;
+  final String _host;
+  final String _dbName;
 
   var db;
 
