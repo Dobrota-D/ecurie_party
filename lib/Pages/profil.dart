@@ -18,7 +18,7 @@ class profil extends StatefulWidget {
 
 class _profil extends State<profil> {
   Color _colorFond = const Color(0xFFFFF3E0);
-  Color _colorButton = const Color(0xFFB71C1C);
+  Color _colorButton = const Color(0xFF730800);
   Color _colorBottumNavBar = const Color(0xFF8D6E63);
 
   final _formKey = GlobalKey<FormState>();
@@ -34,7 +34,7 @@ class _profil extends State<profil> {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: _colorFond,
+            color: _colorBottumNavBar,
           ),
         ),
         Scaffold(
@@ -47,18 +47,18 @@ class _profil extends State<profil> {
               centerTitle: true,
               title: Text('Mon compte')),
           bottomNavigationBar: BottomAppBar(
-            color: _colorBottumNavBar,
+            color: _colorFond,
             // <-- APPBAR WITH TRANSPARENT BG
             elevation: 0,
 
             child: new Row(
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 IconButton(
                   icon: Icon(
-                    Icons.article,
-                    color: _colorFond,
+                    Icons.article,size: 40,
+                    color: _colorBottumNavBar,
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -70,8 +70,8 @@ class _profil extends State<profil> {
                 ),
                 IconButton(
                   icon: Icon(
-                    Icons.add,
-                    color: _colorFond,
+                    Icons.add,size: 40,
+                    color: _colorBottumNavBar,
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -84,8 +84,8 @@ class _profil extends State<profil> {
 
                 IconButton(
                   icon: Icon(
-                    Icons.calendar_month,
-                    color: _colorFond,
+                    Icons.calendar_month,size: 40,
+                    color: _colorBottumNavBar,
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -98,7 +98,7 @@ class _profil extends State<profil> {
                 IconButton(
                   icon: Icon(
                     Icons.face,
-                    color: _colorFond,
+                    color: _colorBottumNavBar,size: 40,
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -115,26 +115,28 @@ class _profil extends State<profil> {
           body: Center(
             child: Column(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0),
-                  child:  Image.network(
-                    'https://www.bowdenpr.co.uk/wp-content/uploads/2020/05/Hollie-5-300x225.jpg',
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: Image.network(
+                      'https://www.bowdenpr.co.uk/wp-content/uploads/2020/05/Hollie-5-300x225.jpg',
+                    ),
                   ),
                 ),
-
-
-
                 Text(
                   "Nom",
                   style: TextStyle(
                     fontSize: 30,
+                    color: _colorFond,
                   ),
                 ),
                 Text(
                   "Prénom",
                   style: TextStyle(
                     fontSize: 30,
-
+                    color: _colorFond,
                   ),
                 ),
                 GestureDetector(
@@ -143,7 +145,7 @@ class _profil extends State<profil> {
                       context: context,
                       builder: (BuildContext context) => AlertDialog(
                         backgroundColor: _colorFond,
-                        title: const Text("Créer un compte"),
+                        title: const Text("Modifier son profil"),
                         content: Form(
                           key: _formKey,
                           child: Column(
@@ -244,7 +246,8 @@ class _profil extends State<profil> {
                         actions: <Widget>[
                           ElevatedButton(
                             onPressed: () {},
-                            style: ElevatedButton.styleFrom(primary: Colors.transparent,
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.transparent,
                               shadowColor: Colors.transparent.withOpacity(0.1),
                             ),
                             child: Container(
@@ -268,14 +271,14 @@ class _profil extends State<profil> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0),
                       ),
-                      color: _colorBottumNavBar,
+                      color: _colorFond,
                       elevation: 10,
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
-                        children: const [
+                        children:  [
                           ListTile(
                             title: Text('Modifier son profil',
-                                style: TextStyle(color: Colors.white)),
+                                style: TextStyle(color: _colorBottumNavBar)),
                           ),
                         ],
                       ),
@@ -293,14 +296,14 @@ class _profil extends State<profil> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0),
                       ),
-                      color: _colorBottumNavBar,
+                      color: _colorFond,
                       elevation: 10,
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
-                        children: const [
+                        children:  [
                           ListTile(
                             title: Text('Se déconnecter',
-                                style: TextStyle(color: Colors.white)),
+                                style: TextStyle(color: _colorBottumNavBar)),
                           ),
                         ],
                       ),
@@ -309,10 +312,8 @@ class _profil extends State<profil> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => form_cours()));
+                    Navigator.push(context,
+                        PageRouteBuilder(pageBuilder: (_, __, ___) => login()));
                   },
                   child: Container(
                     width: 500,
@@ -320,14 +321,14 @@ class _profil extends State<profil> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0),
                       ),
-                      color: _colorBottumNavBar,
+                      color: _colorFond,
                       elevation: 10,
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
-                        children: const [
+                        children:  [
                           ListTile(
                             title: Text('Supprimer son compte',
-                                style: TextStyle(color: Colors.white)),
+                                style: TextStyle(color: _colorBottumNavBar)),
                           ),
                         ],
                       ),
