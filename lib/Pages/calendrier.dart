@@ -13,7 +13,7 @@ class calendrier extends StatefulWidget {
 
 class _CalendarState extends State<calendrier> {
   Color _colorFond = const Color(0xFFFFF3E0);
-  Color _colorButton = const Color(0xFFB71C1C);
+  Color _colorButton = const Color(0xFF730800);
   Color _colorBottumNavBar = const Color(0xFF8D6E63);
 
   CalendarController _calendarController = new CalendarController();
@@ -33,18 +33,18 @@ class _CalendarState extends State<calendrier> {
               centerTitle: true,
               title: Text('Calendrier')),
           bottomNavigationBar: BottomAppBar(
-            color: _colorBottumNavBar,
+            color: _colorFond,
             // <-- APPBAR WITH TRANSPARENT BG
             elevation: 0,
 
             child: new Row(
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 IconButton(
                   icon: Icon(
-                    Icons.article,
-                    color: _colorFond,
+                    Icons.article,size: 40,
+                    color: _colorBottumNavBar,
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -56,8 +56,8 @@ class _CalendarState extends State<calendrier> {
                 ),
                 IconButton(
                   icon: Icon(
-                    Icons.add,
-                    color: _colorFond,
+                    Icons.add,size: 40,
+                    color: _colorBottumNavBar,
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -70,8 +70,8 @@ class _CalendarState extends State<calendrier> {
 
                 IconButton(
                   icon: Icon(
-                    Icons.calendar_month,
-                    color: _colorFond,
+                    Icons.calendar_month,size: 40,
+                    color: _colorBottumNavBar,
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -84,7 +84,7 @@ class _CalendarState extends State<calendrier> {
                 IconButton(
                   icon: Icon(
                     Icons.face,
-                    color: _colorFond,
+                    color: _colorBottumNavBar,size: 40,
                   ),
                   onPressed: () {
                     Navigator.push(

@@ -15,13 +15,21 @@ class actualites extends StatefulWidget {
 }
 
 class _actualites extends State<actualites> {
+
+
+  bool? isHere = false;
+
   Color _colorFond = const Color(0xFFFFF3E0);
-  Color _colorButton = const Color(0xFFB71C1C);
+  Color _colorButton = const Color(0xFF730800);
   Color _colorBottumNavBar = const Color(0xFF8D6E63);
   final _formKey = GlobalKey<FormState>();
   TextEditingController NameController = TextEditingController();
   TextEditingController FirstnameController = TextEditingController();
   TextEditingController MailController = TextEditingController();
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,28 +37,28 @@ class _actualites extends State<actualites> {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: _colorFond,
+            color: _colorBottumNavBar,
           ),
         ),
         Scaffold(
-          backgroundColor: _colorFond,
+          backgroundColor: _colorBottumNavBar,
           appBar: AppBar(
               backgroundColor: _colorButton,
               centerTitle: true,
               title: Text('Fil d\'actualité')),
           bottomNavigationBar: BottomAppBar(
-            color: _colorBottumNavBar,
+            color: _colorFond,
             // <-- APPBAR WITH TRANSPARENT BG
             elevation: 0,
 
             child: new Row(
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 IconButton(
                   icon: Icon(
-                    Icons.article,
-                    color: _colorFond,
+                    Icons.article,size: 40,
+                    color: _colorBottumNavBar,
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -62,8 +70,8 @@ class _actualites extends State<actualites> {
                 ),
                 IconButton(
                   icon: Icon(
-                    Icons.add,
-                    color: _colorFond,
+                    Icons.add,size: 40,
+                    color: _colorBottumNavBar,
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -76,8 +84,8 @@ class _actualites extends State<actualites> {
 
                 IconButton(
                   icon: Icon(
-                    Icons.calendar_month,
-                    color: _colorFond,
+                    Icons.calendar_month,size: 40,
+                    color: _colorBottumNavBar,
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -90,7 +98,7 @@ class _actualites extends State<actualites> {
                 IconButton(
                   icon: Icon(
                     Icons.face,
-                    color: _colorFond,
+                    color: _colorBottumNavBar,size: 40,
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -110,28 +118,33 @@ class _actualites extends State<actualites> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                                pageBuilder: (_, __, ___) => cavalier_list()));
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.transparent,
-                        shadowColor: Colors.transparent.withOpacity(0.1),
-                      ),
-                      child: Container(
-                          width: 150,
-                          height: 150,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: Image.asset(
-                              'assets/images/cavalier.jpg',
-                              height: 100.0,
-                              width: 100.0,
-                              fit: BoxFit.cover,
-                            ),
-                          ))),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                              pageBuilder: (_, __, ___) => cavalier_list()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.transparent,
+                      shadowColor: Colors.transparent.withOpacity(0.1),
+                    ),
+                    child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 16),
+                        child: Container(
+
+                            width: 150,
+                            height: 150,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10.0),
+                              child: Image.asset(
+                                'assets/images/cavalier.jpg',
+                                height: 100.0,
+                                width: 100.0,
+                                fit: BoxFit.cover,
+                              ),
+                            ))),
+                  ),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
@@ -158,28 +171,35 @@ class _actualites extends State<actualites> {
                   ),
                 ],
               ),
+
               Container(
                 child: Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
                   ),
-                  color: _colorBottumNavBar,
+                  color: _colorFond,
                   elevation: 10,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      ListTile(
+                       ListTile(
                         //  leading: Icon(Icons.add, size: 70),
                         title: Text('Endurance : Cergy ',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: _colorBottumNavBar,
                               fontWeight: FontWeight.bold,
                             )),
-
                         subtitle: Text('12/12 à 13:00',
-                            style: TextStyle(color: Colors.white)),
+                            style: TextStyle(color: _colorBottumNavBar)),
                       ),
-                      Text('', style: TextStyle(color: Colors.white)),
+                      CheckboxListTile(
+                        value: isHere,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            isHere = value;
+                          });
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -189,7 +209,7 @@ class _actualites extends State<actualites> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
                   ),
-                  color: _colorBottumNavBar,
+                  color: _colorFond,
                   elevation: 10,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -203,11 +223,19 @@ class _actualites extends State<actualites> {
                         ),
                         title: Text('Concours grand galop',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: _colorBottumNavBar,
                               fontWeight: FontWeight.bold,
                             )),
                         subtitle: Text('12/12 à 13:00 Conflans',
-                            style: TextStyle(color: Colors.white)),
+                            style: TextStyle(color: _colorBottumNavBar)),
+                      ),
+                      CheckboxListTile(
+                        value: isHere,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            isHere = value;
+                          });
+                        },
                       ),
                     ],
                   ),
@@ -218,7 +246,7 @@ class _actualites extends State<actualites> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
                   ),
-                  color: _colorBottumNavBar,
+                  color: _colorFond,
                   elevation: 10,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -226,13 +254,22 @@ class _actualites extends State<actualites> {
                       ListTile(
                         title: Text('Convention : La boucherie chevaline',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: _colorBottumNavBar,
                               fontWeight: FontWeight.bold,
                             )),
                         subtitle: Text('16/12 à 16:00',
-                            style: TextStyle(color: Colors.white)),
+                            style: TextStyle(color: _colorBottumNavBar)),
+
+
                       ),
-                      Text('', style: TextStyle(color: Colors.white)),
+                      CheckboxListTile(
+                        value: isHere,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            isHere = value;
+                          });
+                        },
+                      ),
                     ],
                   ),
                 ),

@@ -13,7 +13,7 @@ class login extends StatefulWidget {
 
 class _login extends State<login> {
   Color _colorFond = const Color(0xFFFFF3E0);
-  Color _colorButton = const Color(0xFFB71C1C);
+  Color _colorButton = const Color(0xFF730800);
 
   final _formKey = GlobalKey<FormState>();
   final NameController = TextEditingController();
@@ -36,8 +36,8 @@ class _login extends State<login> {
         Container(
           decoration: BoxDecoration(color: _colorFond),
         ),
-        Scaffold(
 
+        Scaffold(
           backgroundColor: Colors.transparent,
           // <-- SCAFFOLD WITH TRANSPARENT BG
 
@@ -70,6 +70,7 @@ class _login extends State<login> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child: TextFormField(
+                    obscureText: true,
                     decoration: InputDecoration(
                       border: UnderlineInputBorder(),
                       fillColor: _colorButton,
