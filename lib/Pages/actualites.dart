@@ -217,6 +217,13 @@ class _actualites extends State<actualites> {
                                       color: _colorBottumNavBar,
                                     ),
                                   ),
+                                  Text(
+                                    "\nListe des participants: \n\nPepito \nGranola \nPetit Lu", textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: _colorBottumNavBar,
+                                    ),
+                                  ),
                                   CheckboxListTile(
                                     value: participation,
                                     onChanged: (bool? value) {
@@ -310,6 +317,14 @@ class _actualites extends State<actualites> {
                                       color: _colorBottumNavBar,
                                     ),
                                   ),
+
+                                  Text(
+                                    "\nListe des participants: \n\nPepito \nGranola \nPetit Lu", textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: _colorBottumNavBar,
+                                    ),
+                                  ),
                                   CheckboxListTile(
                                     value: participation,
                                     onChanged: (bool? value) {
@@ -399,6 +414,14 @@ class _actualites extends State<actualites> {
                                     style: TextStyle(
 
                                       fontSize: 17,
+                                      color: _colorBottumNavBar,
+                                    ),
+                                  ),
+
+                                  Text(
+                                    "\nListe des participants: \n\nPepito \nGranola \nPetit Lu", textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontSize: 15,
                                       color: _colorBottumNavBar,
                                     ),
                                   ),

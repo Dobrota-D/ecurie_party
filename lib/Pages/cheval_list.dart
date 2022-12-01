@@ -99,6 +99,7 @@ class _cheval_list extends State<cheval_list> {
               title: Text('Liste des chevaux')),
           bottomNavigationBar: BottomAppBar(
             color: _colorFond,
+
             // <-- APPBAR WITH TRANSPARENT BG
             elevation: 0,
 
@@ -106,9 +107,12 @@ class _cheval_list extends State<cheval_list> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+
                 IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
-                    Icons.article,size: 40,
+                    Icons.article,
+                    size: 40,
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
@@ -120,8 +124,10 @@ class _cheval_list extends State<cheval_list> {
                   },
                 ),
                 IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
-                    Icons.add,size: 40,
+                    Icons.add,
+                    size: 40,
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
@@ -134,8 +140,10 @@ class _cheval_list extends State<cheval_list> {
                 ),
 
                 IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
-                    Icons.calendar_month,size: 40,
+                    Icons.calendar_month,
+                    size: 40,
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
@@ -147,9 +155,11 @@ class _cheval_list extends State<cheval_list> {
                   },
                 ),
                 IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
                     Icons.face,
-                    color: _colorBottumNavBar,size: 40,
+                    color: _colorBottumNavBar,
+                    size: 40,
                   ),
                   onPressed: () {
                     Navigator.push(
