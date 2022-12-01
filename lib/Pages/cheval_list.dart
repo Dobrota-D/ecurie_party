@@ -43,6 +43,19 @@ class _cheval_list extends State<cheval_list> {
             subtitle: Text('Cavalier',
                 style: TextStyle(color: Colors.white)),
           ),
+
+
+          CheckboxListTile(
+
+            value: valid,
+            onChanged: (bool? value) {
+              setState(() {
+                valid = value;
+                Navigator.of(context).pop();
+              });
+            },
+            title: Text("Je participe"),
+          ),
         ],
       ),
     );
@@ -55,6 +68,10 @@ class _cheval_list extends State<cheval_list> {
       list_card.add(CreateCard(user));
     });
   }
+
+  bool? valid = false;
+
+
 
   Color _colorFond = const Color(0xFFFFF3E0);
   Color _colorButton = const Color(0xFF730800);

@@ -282,9 +282,6 @@ class _form_concours extends State<form_concours> {
                   title: Text("Grand galop"),
                 ),
 
-
-
-
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(

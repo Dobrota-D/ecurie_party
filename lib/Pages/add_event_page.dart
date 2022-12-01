@@ -35,7 +35,7 @@ class _add_event_page extends State<add_event_page> {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: _colorFond,
+            color: _colorBottumNavBar,
           ),
         ),
         Scaffold(
@@ -133,15 +133,15 @@ class _add_event_page extends State<add_event_page> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0),
                             ),
-                            color: _colorBottumNavBar,
+                            color: _colorFond,
                             elevation: 10,
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
-                              children: const [
+                              children:  [
                                 ListTile(
-                                  leading: Icon(Icons.add, size: 70),
+                                  leading: Icon(Icons.add, size: 70,color:_colorBottumNavBar,),
                                   title: Text('Ajouter une course',
-                                      style: TextStyle(color: Colors.white)),
+                                      style: TextStyle(color:_colorBottumNavBar,)),
                                 ),
                                 Text('', style: TextStyle(color: Colors.white)),
                               ],
@@ -162,17 +162,17 @@ class _add_event_page extends State<add_event_page> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0),
                             ),
-                            color: _colorBottumNavBar,
+                            color: _colorFond,
                             elevation: 10,
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
-                              children: const [
+                              children:  [
                                 ListTile(
-                                  leading: Icon(Icons.add, size: 70),
+                                  leading: Icon(Icons.add, size: 70,color:_colorBottumNavBar,),
                                   title: Text('Ajouter un évènement',
-                                      style: TextStyle(color: Colors.white)),
+                                      style: TextStyle(color:_colorBottumNavBar,)),
                                 ),
-                                Text('', style: TextStyle(color: Colors.white)),
+                                Text('', style: TextStyle(color:_colorBottumNavBar,)),
                               ],
                             ),
                           ),
@@ -191,15 +191,15 @@ class _add_event_page extends State<add_event_page> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0),
                             ),
-                            color: _colorBottumNavBar,
+                            color: _colorFond,
                             elevation: 10,
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
-                              children: const [
+                              children:  [
                                 ListTile(
-                                  leading: Icon(Icons.add, size: 70),
+                                  leading: Icon(Icons.add, size: 70, color:_colorBottumNavBar,),
                                   title: Text('Ajouter un cours',
-                                      style: TextStyle(color: Colors.white)),
+                                      style: TextStyle(color: _colorBottumNavBar)),
                                 ),
                                 Text('', style: TextStyle(color: Colors.white)),
                               ],
