@@ -17,6 +17,8 @@ class cavalier_list extends StatefulWidget {
 }
 
 class _cavalier_list extends State<cavalier_list> {
+
+  bool? isHere = false;
   Widget CreateCard(User user) {
     return Card(
       shape: RoundedRectangleBorder(
@@ -43,7 +45,19 @@ class _cavalier_list extends State<cavalier_list> {
             subtitle: Text('Prénom',
                 style: TextStyle(color: Colors.white)),
           ),
+          Visibility(
+            child:
+            CheckboxListTile(
+              value: isHere,
+              onChanged: (bool? value) {
+                setState(() {
+                  isHere = value;
+                });
+              },
+
+            ), visible: false,),
         ],
+
       ),
     );
   }

@@ -17,6 +17,8 @@ class cheval_list extends StatefulWidget {
 }
 
 class _cheval_list extends State<cheval_list> {
+
+  bool? isHere = false;
   Widget CreateCard(User user) {
     return Card(
       shape: RoundedRectangleBorder(
@@ -45,17 +47,17 @@ class _cheval_list extends State<cheval_list> {
           ),
 
 
-          CheckboxListTile(
+          Visibility(
+            child:
+            CheckboxListTile(
+              value: isHere,
+              onChanged: (bool? value) {
+                setState(() {
+                  isHere = value;
+                });
+              },
 
-            value: valid,
-            onChanged: (bool? value) {
-              setState(() {
-                valid = value;
-                Navigator.of(context).pop();
-              });
-            },
-            title: Text("Je participe"),
-          ),
+            ), visible: false,),
         ],
       ),
     );
