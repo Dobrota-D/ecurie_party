@@ -11,7 +11,13 @@ class EventController {
   static const String party = "party";
   static const String course = "course";
 
-  static void create(DataBase db, Event event){
+  //Event object is initialise but it's missing some data
+  static void prepare(DataBase db, Event event){
+
+    EventController._create(db, event);
+  }
+
+  static void _create(DataBase db, Event event){
     db.insert(collectionName, event.toJson());
   }
 

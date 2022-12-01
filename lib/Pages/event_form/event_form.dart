@@ -8,7 +8,14 @@ class EventForm{
  final ValueNotifier<DateTime?> dateSub = ValueNotifier(null);
  final ValueNotifier<TimeOfDay?> timeSubShort = ValueNotifier(null);
 
- final _formKey = GlobalKey<FormState>();
+ final formKey = GlobalKey<FormState>();
+
+ var validator = (value) {
+   if (value == null || value.isEmpty){
+     return 'Error';
+   }
+   return null;
+ };
 
  String convertDate(DateTime dateTime) {
    return DateFormat('dd/MM/yyyy').format(dateTime);
@@ -38,15 +45,10 @@ class EventForm{
      ),
    );
  }
- Widget submitButton(BuildContext context){
+
+ Widget submitButton(BuildContext context, var validate){
   return ElevatedButton(
-    onPressed: () {
-      Navigator.push(
-          context,
-          PageRouteBuilder(
-              pageBuilder: (_, __, ___) => actualites()));
-      // accéder au fil d'actu
-    },
+    onPressed: validate,
     style: ElevatedButton.styleFrom(
       primary: Colors.transparent,
       shadowColor: Colors.transparent.withOpacity(0.1),

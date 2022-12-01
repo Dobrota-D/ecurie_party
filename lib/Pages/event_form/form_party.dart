@@ -23,134 +23,126 @@ class FormParty extends StatefulWidget {
 
 class _FormParty extends State<FormParty> with EventForm {
   TextEditingController eventNameController = TextEditingController();
+  TextEditingController adressController = TextEditingController();
 
-  TextEditingController nameController = TextEditingController();
-  TextEditingController firstnameController = TextEditingController();
-  TextEditingController mailController = TextEditingController();
-
-  String _dropDownEvent = "Type de soirée";
+  String _dropDownEvent = "";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
-      // <-- SCAFFOLD WITH TRANSPARENT BG
-      appBar: AppBar(
-          backgroundColor: buttonColor,
-          centerTitle: true,
-          title: const Text('Organiser une soirée')),
-
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextFormField(
-                  decoration: InputDecoration(
-                    border: const UnderlineInputBorder(),
-                    fillColor: buttonColor,
-                    labelText: 'Nom de l\'évènement',
+        backgroundColor: backgroundColor,
+        // <-- SCAFFOLD WITH TRANSPARENT BG
+        appBar: AppBar(
+            backgroundColor: buttonColor,
+            centerTitle: true,
+            title: const Text('Organiser une soirée')),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            child: Form(
+              key: formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  TextFormField(
+                    decoration: InputDecoration(
+                      border: const UnderlineInputBorder(),
+                      fillColor: buttonColor,
+                      labelText: 'Nom de l\'évènement',
+                    ),
+                    controller: eventNameController,
+                    validator: validator,
                   ),
-                  controller: eventNameController,
-                  validator: (textMail) {
-                    if (textMail!.isEmpty) {
-                      return 'Veuillez saisir un texte';
-                    }
-                    return null;
-                  },
-                ),
-              TextFormField(
-                  decoration: InputDecoration(
-                    border: const UnderlineInputBorder(),
-                    fillColor: buttonColor,
-                    labelText: 'Adresse',
+                  TextFormField(
+                    decoration: InputDecoration(
+                      border: const UnderlineInputBorder(),
+                      fillColor: buttonColor,
+                      labelText: 'Adresse',
+                    ),
+                    controller: adressController,
+                    validator: validator,
                   ),
-                  controller: eventNameController,
-                  validator: (textMail) {
-                    if (textMail!.isEmpty) {
-                      return 'Veuillez saisir un texte';
-                    }
-                    return null;
-                  },
-                ),
-              ValueListenableBuilder<DateTime?>(
+                  DropdownButton(
+                      hint: const Text(
+                        "Thème de la soirée",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      isExpanded: true,
+                      iconSize: 30.0,
+                      style: const TextStyle(color: Colors.blue),
+                      items: ['Convention', 'Apéro', 'Repas']
+                          .map(
+                            (val) => DropdownMenuItem<String>(
+                              value: val,
+                              child: Text(val),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (val) {
+                        setState(() {
+                          _dropDownEvent = val!;
+                        });
+                      }),
+                  ValueListenableBuilder<DateTime?>(
                     valueListenable: dateSub,
-                    builder: (context, dateVal, child) {
-                      return InkWell(
-                          onTap: () async {
-                            DateTime? date = await showDatePicker(
+                    builder: (context, dateVal, child) => InkWell(
+                        onTap: () async {
+                          DateTime? date = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime.now(),
+                            lastDate: DateTime(2050),
+                            currentDate: DateTime.now(),
+                            initialEntryMode: DatePickerEntryMode.calendar,
+                            initialDatePickerMode: DatePickerMode.day,
+                            builder: (context, child) => Theme(
+                              data: Theme.of(context).copyWith(
+                                  colorScheme: const ColorScheme.light(
+                                primary: Colors.blueGrey,
+                                // onSurface: AppColors.blackCoffee,
+                              )),
+                              child: child!,
+                            ),
+                          );
+                          dateSub.value = date;
+                        },
+                        child: buildDateTimePicker(
+                            dateVal != null ? convertDate(dateVal) : '')),
+                  ),
+                  ValueListenableBuilder<TimeOfDay?>(
+                      valueListenable: timeSubShort,
+                      builder: (context, timeVal, child) {
+                        return InkWell(
+                            onTap: () async {
+                              TimeOfDay? time = await showTimePicker(
                                 context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime.now(),
-                                lastDate: DateTime(2050),
-                                currentDate: DateTime.now(),
-                                initialEntryMode: DatePickerEntryMode.calendar,
-                                initialDatePickerMode: DatePickerMode.day,
                                 builder: (context, child) {
                                   return Theme(
-                                    data: Theme.of(context).copyWith(
-                                        colorScheme: const ColorScheme.light(
-                                          primary: Colors.blueGrey,
-                                          // onSurface: AppColors.blackCoffee,
-                                        )),
+                                    data: Theme.of(context),
                                     child: child!,
                                   );
-                                });
-                            dateSub.value = date;
-                          },
-                          child: buildDateTimePicker(
-                              dateVal != null ? convertDate(dateVal) : ''));
-                    }),
-              ValueListenableBuilder<TimeOfDay?>(
-                    valueListenable: timeSubShort,
-                    builder: (context, timeVal, child) {
-                      return InkWell(
-                          onTap: () async {
-                            TimeOfDay? time = await showTimePicker(
-                              context: context,
-                              builder: (context, child) {
-                                return Theme(
-                                  data: Theme.of(context),
-                                  child: child!,
-                                );
-                              },
-                              initialTime: TimeOfDay.now(),
-                            );
-                            timeSubShort.value = time;
-                          },
-                          child: buildDateTimePicker(timeVal != null
-                              ? convertTime(timeVal)
-                              : ''));
-                    }),
-              DropdownButton(
-                  hint: Text(
-                    _dropDownEvent,
-                    style: const TextStyle(color: Colors.blue),
-                  ),
-                  isExpanded: true,
-                  iconSize: 30.0,
-                  style: const TextStyle(color: Colors.blue),
-                  items: ['Convention', 'Apéro', 'Repas'].map(
-                    (val) {
-                      return DropdownMenuItem<String>(
-                        value: val,
-                        child: Text(val),
-                      );
-                    },
-                  ).toList(),
-                  onChanged: (val) {
-                    setState(
-                      () {
-                        _dropDownEvent = val!;
-                      },
-                    );
+                                },
+                                initialTime: TimeOfDay.now(),
+                              );
+                              timeSubShort.value = time;
+                            },
+                            child: buildDateTimePicker(
+                                timeVal != null ? convertTime(timeVal) : ''));
+                      }),
+                  submitButton(context,() {
+                    print(timeSubShort.value);
+                    print(dateSub.value);
+                    print(_dropDownEvent);
+                    print(formKey.currentState!.validate());
+                    if (timeSubShort.value != null && dateSub.value != null && formKey.currentState!.validate() && _dropDownEvent.isNotEmpty) {
+                      Navigator.of(context).pop();
+                    }
                   }),
-              submitButton(context),
-            ],
+                ],
+              ),
+            ),
           ),
-        ),
-      )
-    );
+        ));
   }
 }

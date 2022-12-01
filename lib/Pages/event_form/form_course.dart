@@ -37,121 +37,127 @@ class _FormCourse extends State<FormCourse> with EventForm {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextFormField(
-                decoration: InputDecoration(
-                  border: const UnderlineInputBorder(),
-                  fillColor: buttonColor,
-                  labelText: 'Nom de l\'évènement',
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextFormField(
+                  decoration: InputDecoration(
+                    border: const UnderlineInputBorder(),
+                    fillColor: buttonColor,
+                    labelText: 'Nom de l\'évènement',
+                  ),
+                  controller: eventNameController,
+                  validator: (textMail) {
+                    if (textMail!.isEmpty) {
+                      return 'Veuillez saisir un texte';
+                    }
+                    return null;
+                  },
                 ),
-                controller: eventNameController,
-                validator: (textMail) {
-                  if (textMail!.isEmpty) {
-                    return 'Veuillez saisir un texte';
-                  }
-                  return null;
-                },
-              ),
-              ValueListenableBuilder<DateTime?>(
-                  valueListenable: dateSub,
-                  builder: (context, dateVal, child) {
-                    return InkWell(
-                        onTap: () async {
-                          DateTime? date = await showDatePicker(
+                ValueListenableBuilder<DateTime?>(
+                    valueListenable: dateSub,
+                    builder: (context, dateVal, child) {
+                      return InkWell(
+                          onTap: () async {
+                            DateTime? date = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime.now(),
+                                lastDate: DateTime(2050),
+                                currentDate: DateTime.now(),
+                                initialEntryMode:
+                                DatePickerEntryMode.calendar,
+                                initialDatePickerMode: DatePickerMode.day,
+                                builder: (context, child) {
+                                  return Theme(
+                                    data: Theme.of(context).copyWith(
+                                        colorScheme: const ColorScheme.light(
+                                          primary: Colors.blueGrey,
+                                          // onSurface: AppColors.blackCoffee,
+                                        )),
+                                    child: child!,
+                                  );
+                                });
+                            dateSub.value = date;
+                          },
+                          child: buildDateTimePicker(
+                              dateVal != null ? convertDate(dateVal) : ''));
+                    }),
+                ValueListenableBuilder<TimeOfDay?>(
+                    valueListenable: timeSubShort,
+                    builder: (context, timeVal, child) {
+                      return InkWell(
+                          onTap: () async {
+                            TimeOfDay? time = await showTimePicker(
                               context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime.now(),
-                              lastDate: DateTime(2050),
-                              currentDate: DateTime.now(),
-                              initialEntryMode:
-                                  DatePickerEntryMode.calendar,
-                              initialDatePickerMode: DatePickerMode.day,
                               builder: (context, child) {
                                 return Theme(
-                                  data: Theme.of(context).copyWith(
-                                      colorScheme: const ColorScheme.light(
-                                    primary: Colors.blueGrey,
-                                    // onSurface: AppColors.blackCoffee,
-                                  )),
+                                  data: Theme.of(context),
                                   child: child!,
                                 );
-                              });
-                          dateSub.value = date;
-                        },
-                        child: buildDateTimePicker(
-                            dateVal != null ? convertDate(dateVal) : ''));
-                  }),
-              ValueListenableBuilder<TimeOfDay?>(
-                  valueListenable: timeSubShort,
-                  builder: (context, timeVal, child) {
-                    return InkWell(
-                        onTap: () async {
-                          TimeOfDay? time = await showTimePicker(
-                            context: context,
-                            builder: (context, child) {
-                              return Theme(
-                                data: Theme.of(context),
-                                child: child!,
-                              );
-                            },
-                            initialTime: TimeOfDay.now(),
-                          );
-                          timeSubShort.value = time;
-                        },
-                        child: buildDateTimePicker(
-                            timeVal != null ? convertTime(timeVal) : ''));
-                  }),
-              DropdownButton(
-                  hint: Text(
-                    _dropDownDiscipline,
+                              },
+                              initialTime: TimeOfDay.now(),
+                            );
+                            timeSubShort.value = time;
+                          },
+                          child: buildDateTimePicker(
+                              timeVal != null ? convertTime(timeVal) : ''));
+                    }),
+                DropdownButton(
+                    hint: const Text(
+                      "Discipline",
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                    isExpanded: true,
+                    iconSize: 30.0,
                     style: const TextStyle(color: Colors.blue),
-                  ),
-                  isExpanded: true,
-                  iconSize: 30.0,
-                  style: const TextStyle(color: Colors.blue),
-                  items: ['Endurance', 'Entretient', 'Grand galop'].map(
-                    (val) {
-                      return DropdownMenuItem<String>(
-                        value: val,
-                        child: Text(val),
-                      );
-                    },
-                  ).toList(),
-                  onChanged: (val) {
-                    setState(
-                      () {
-                        _dropDownDiscipline = val!;
+                    items: ['Endurance', 'Entretient', 'Grand galop'].map(
+                          (val) {
+                        return DropdownMenuItem<String>(
+                          value: val,
+                          child: Text(val),
+                        );
                       },
-                    );
-                  }),
-              DropdownButton(
-                  hint: Text(
-                    _dropDownLocation,
+                    ).toList(),
+                    onChanged: (val) {
+                      setState(
+                            () {
+                          _dropDownDiscipline = val!;
+                        },
+                      );
+                    }),
+                DropdownButton(
+                    hint: const Text(
+                      "Adresse",
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                    isExpanded: true,
+                    iconSize: 30.0,
                     style: const TextStyle(color: Colors.blue),
-                  ),
-                  isExpanded: true,
-                  iconSize: 30.0,
-                  style: const TextStyle(color: Colors.blue),
-                  items: ['Cergy', 'Conflans', 'Pontoise'].map(
-                    (val) {
-                      return DropdownMenuItem<String>(
-                        value: val,
-                        child: Text(val),
-                      );
-                    },
-                  ).toList(),
-                  onChanged: (val) {
-                    setState(
-                      () {
-                        _dropDownLocation = val!;
+                    items: ['Cergy', 'Conflans', 'Pontoise'].map(
+                          (val) {
+                        return DropdownMenuItem<String>(
+                          value: val,
+                          child: Text(val),
+                        );
                       },
-                    );
-                  }),
-              submitButton(context),
-            ],
-          )
+                    ).toList(),
+                    onChanged: (val) {
+                      setState(() { _dropDownLocation = val!; });
+                    }),
+                submitButton(context, () {
+                  print(timeSubShort.value);
+                  print(dateSub.value);
+                  print(formKey.currentState!.validate());
+                  if (timeSubShort.value != null && dateSub.value != null && formKey.currentState!.validate() && _dropDownLocation.isNotEmpty && _dropDownDiscipline.isNotEmpty) {
+                    Navigator.of(context).pop();
+                  }
+                }),
+              ],
+            ),
+          ),
         ),
       )
     );

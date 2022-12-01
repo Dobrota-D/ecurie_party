@@ -6,7 +6,7 @@ class Party extends Event {
   String theme;
 
   Party(super.id, super.name, super.eventType, super.idUser, super.horsemenList,
-      super.date, super.location, this.theme);
+      super.date, super.location, super.isAuthorise, this.theme);
 
   static Party init(Map<String, dynamic> data) {
     return Party(
@@ -14,6 +14,7 @@ class Party extends Event {
         data["name"],
         data["eventType"],
         data["idUser"],
+        data["isAuthorise"],
         data["horsemenList"],
         data["date"],
         data["location"],
