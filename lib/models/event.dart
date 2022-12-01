@@ -7,9 +7,9 @@ class Event extends DbCollection{
   String eventType;
   int idUser; //The One that own the event
   List<int> horsemenList;
-  String? theme;
   DateTime date;
+  String location;
 
   Event(this.id, this.name, this.eventType, this.idUser, this.horsemenList,
-      this.theme, this.date);
+      this.date, this.location);
 }
