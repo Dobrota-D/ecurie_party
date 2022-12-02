@@ -48,6 +48,7 @@ class _profil extends State<profil> {
               title: Text('Mon compte')),
           bottomNavigationBar: BottomAppBar(
             color: _colorFond,
+
             // <-- APPBAR WITH TRANSPARENT BG
             elevation: 0,
 
@@ -55,9 +56,12 @@ class _profil extends State<profil> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+
                 IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
-                    Icons.article,size: 40,
+                    Icons.article,
+                    size: 40,
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
@@ -69,8 +73,10 @@ class _profil extends State<profil> {
                   },
                 ),
                 IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
-                    Icons.add,size: 40,
+                    Icons.add,
+                    size: 40,
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
@@ -83,8 +89,10 @@ class _profil extends State<profil> {
                 ),
 
                 IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
-                    Icons.calendar_month,size: 40,
+                    Icons.calendar_month,
+                    size: 40,
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
@@ -96,9 +104,11 @@ class _profil extends State<profil> {
                   },
                 ),
                 IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
                     Icons.face,
-                    color: _colorBottumNavBar,size: 40,
+                    color: _colorBottumNavBar,
+                    size: 40,
                   ),
                   onPressed: () {
                     Navigator.push(

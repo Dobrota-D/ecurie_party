@@ -17,6 +17,8 @@ class cavalier_list extends StatefulWidget {
 }
 
 class _cavalier_list extends State<cavalier_list> {
+
+  bool? isHere = false;
   Widget CreateCard(User user) {
     return Card(
       shape: RoundedRectangleBorder(
@@ -43,7 +45,19 @@ class _cavalier_list extends State<cavalier_list> {
             subtitle: Text('Prénom',
                 style: TextStyle(color: Colors.white)),
           ),
+          Visibility(
+            child:
+            CheckboxListTile(
+              value: isHere,
+              onChanged: (bool? value) {
+                setState(() {
+                  isHere = value;
+                });
+              },
+
+            ), visible: false,),
         ],
+
       ),
     );
   }
@@ -80,6 +94,7 @@ class _cavalier_list extends State<cavalier_list> {
               title: Text('Liste des cavaliers')),
           bottomNavigationBar: BottomAppBar(
             color: _colorFond,
+
             // <-- APPBAR WITH TRANSPARENT BG
             elevation: 0,
 
@@ -87,9 +102,12 @@ class _cavalier_list extends State<cavalier_list> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+
                 IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
-                    Icons.article,size: 40,
+                    Icons.article,
+                    size: 40,
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
@@ -101,8 +119,10 @@ class _cavalier_list extends State<cavalier_list> {
                   },
                 ),
                 IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
-                    Icons.add,size: 40,
+                    Icons.add,
+                    size: 40,
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
@@ -115,8 +135,10 @@ class _cavalier_list extends State<cavalier_list> {
                 ),
 
                 IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
-                    Icons.calendar_month,size: 40,
+                    Icons.calendar_month,
+                    size: 40,
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
@@ -128,9 +150,11 @@ class _cavalier_list extends State<cavalier_list> {
                   },
                 ),
                 IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
                     Icons.face,
-                    color: _colorBottumNavBar,size: 40,
+                    color: _colorBottumNavBar,
+                    size: 40,
                   ),
                   onPressed: () {
                     Navigator.push(

@@ -29,7 +29,7 @@ class _add_event_page extends State<add_event_page> {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: _colorFond,
+            color: _colorBottumNavBar,
           ),
         ),
         Scaffold(
@@ -41,6 +41,7 @@ class _add_event_page extends State<add_event_page> {
               title: const Text('Créer des évènements')),
           bottomNavigationBar: BottomAppBar(
             color: _colorFond,
+
             // <-- APPBAR WITH TRANSPARENT BG
             elevation: 0,
 
@@ -48,9 +49,12 @@ class _add_event_page extends State<add_event_page> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+
                 IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
-                    Icons.article,size: 40,
+                    Icons.article,
+                    size: 40,
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
@@ -62,8 +66,10 @@ class _add_event_page extends State<add_event_page> {
                   },
                 ),
                 IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
-                    Icons.add,size: 40,
+                    Icons.add,
+                    size: 40,
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
@@ -76,8 +82,10 @@ class _add_event_page extends State<add_event_page> {
                 ),
 
                 IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
-                    Icons.calendar_month,size: 40,
+                    Icons.calendar_month,
+                    size: 40,
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
@@ -89,9 +97,11 @@ class _add_event_page extends State<add_event_page> {
                   },
                 ),
                 IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
                     Icons.face,
-                    color: _colorBottumNavBar,size: 40,
+                    color: _colorBottumNavBar,
+                    size: 40,
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -126,7 +136,7 @@ class _add_event_page extends State<add_event_page> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0),
                             ),
-                            color: _colorBottumNavBar,
+                            color: _colorFond,
                             elevation: 10,
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -155,17 +165,17 @@ class _add_event_page extends State<add_event_page> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0),
                             ),
-                            color: _colorBottumNavBar,
+                            color: _colorFond,
                             elevation: 10,
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
-                              children: const [
-                                ListTile(
+                              children:  [
+                                const ListTile(
                                   leading: Icon(Icons.add, size: 70),
                                   title: Text('Organiser une soirée',
                                       style: TextStyle(color: Colors.white)),
                                 ),
-                                Text('', style: TextStyle(color: Colors.white)),
+                                Text('', style: TextStyle(color:_colorBottumNavBar,)),
                               ],
                             ),
                           ),
@@ -184,7 +194,7 @@ class _add_event_page extends State<add_event_page> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0),
                             ),
-                            color: _colorBottumNavBar,
+                            color: _colorFond,
                             elevation: 10,
                             child: Column(
                               mainAxisSize: MainAxisSize.min,

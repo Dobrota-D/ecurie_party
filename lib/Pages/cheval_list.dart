@@ -17,6 +17,8 @@ class cheval_list extends StatefulWidget {
 }
 
 class _cheval_list extends State<cheval_list> {
+
+  bool? isHere = false;
   Widget CreateCard(User user) {
     return Card(
       shape: RoundedRectangleBorder(
@@ -43,6 +45,19 @@ class _cheval_list extends State<cheval_list> {
             subtitle: Text('Cavalier',
                 style: TextStyle(color: Colors.white)),
           ),
+
+
+          Visibility(
+            child:
+            CheckboxListTile(
+              value: isHere,
+              onChanged: (bool? value) {
+                setState(() {
+                  isHere = value;
+                });
+              },
+
+            ), visible: false,),
         ],
       ),
     );
@@ -55,6 +70,10 @@ class _cheval_list extends State<cheval_list> {
       list_card.add(CreateCard(user));
     });
   }
+
+  bool? valid = false;
+
+
 
   Color _colorFond = const Color(0xFFFFF3E0);
   Color _colorButton = const Color(0xFF730800);
@@ -80,6 +99,7 @@ class _cheval_list extends State<cheval_list> {
               title: Text('Liste des chevaux')),
           bottomNavigationBar: BottomAppBar(
             color: _colorFond,
+
             // <-- APPBAR WITH TRANSPARENT BG
             elevation: 0,
 
@@ -87,9 +107,12 @@ class _cheval_list extends State<cheval_list> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+
                 IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
-                    Icons.article,size: 40,
+                    Icons.article,
+                    size: 40,
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
@@ -101,8 +124,10 @@ class _cheval_list extends State<cheval_list> {
                   },
                 ),
                 IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
-                    Icons.add,size: 40,
+                    Icons.add,
+                    size: 40,
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
@@ -115,8 +140,10 @@ class _cheval_list extends State<cheval_list> {
                 ),
 
                 IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
-                    Icons.calendar_month,size: 40,
+                    Icons.calendar_month,
+                    size: 40,
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
@@ -128,9 +155,11 @@ class _cheval_list extends State<cheval_list> {
                   },
                 ),
                 IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
                     Icons.face,
-                    color: _colorBottumNavBar,size: 40,
+                    color: _colorBottumNavBar,
+                    size: 40,
                   ),
                   onPressed: () {
                     Navigator.push(
