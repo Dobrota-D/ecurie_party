@@ -51,7 +51,7 @@ class _add_event_page extends State<add_event_page> {
               children: <Widget>[
 
                 IconButton(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
                     Icons.article,
                     size: 40,
@@ -66,7 +66,7 @@ class _add_event_page extends State<add_event_page> {
                   },
                 ),
                 IconButton(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
                     Icons.add,
                     size: 40,
@@ -82,7 +82,7 @@ class _add_event_page extends State<add_event_page> {
                 ),
 
                 IconButton(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
                     Icons.calendar_month,
                     size: 40,
@@ -97,7 +97,7 @@ class _add_event_page extends State<add_event_page> {
                   },
                 ),
                 IconButton(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
                     Icons.face,
                     color: _colorBottumNavBar,
@@ -128,7 +128,7 @@ class _add_event_page extends State<add_event_page> {
                           Navigator.push(
                               context,
                               PageRouteBuilder(
-                                  pageBuilder: (_, __, ___) => FormTournament()));
+                                  pageBuilder: (_, __, ___) => const FormTournament()));
                         },
                         child: Container(
                           width: 500,
@@ -140,13 +140,13 @@ class _add_event_page extends State<add_event_page> {
                             elevation: 10,
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
-                              children: const [
+                              children: [
                                 ListTile(
-                                  leading: Icon(Icons.add, size: 70),
+                                  leading: const Icon(Icons.add, size: 70),
                                   title: Text('Organiser une compétition',
-                                      style: TextStyle(color: Colors.white)),
+                                      style: TextStyle(color: _colorBottumNavBar)),
                                 ),
-                                Text('', style: TextStyle(color: Colors.white)),
+                                const Text(''),
                               ],
                             ),
                           ),
@@ -170,12 +170,12 @@ class _add_event_page extends State<add_event_page> {
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children:  [
-                                const ListTile(
-                                  leading: Icon(Icons.add, size: 70),
+                                ListTile(
+                                  leading: const Icon(Icons.add, size: 70),
                                   title: Text('Organiser une soirée',
-                                      style: TextStyle(color: Colors.white)),
+                                      style: TextStyle(color: _colorBottumNavBar)),
                                 ),
-                                Text('', style: TextStyle(color:_colorBottumNavBar,)),
+                                const Text(''),
                               ],
                             ),
                           ),
@@ -198,13 +198,13 @@ class _add_event_page extends State<add_event_page> {
                             elevation: 10,
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
-                              children: const [
+                              children: [
                                 ListTile(
-                                  leading: Icon(Icons.add, size: 70),
+                                  leading: const Icon(Icons.add, size: 70),
                                   title: Text('Organiser un cours',
-                                      style: TextStyle(color: Colors.white)),
+                                      style: TextStyle(color: _colorBottumNavBar)),
                                 ),
-                                Text('', style: TextStyle(color: Colors.white)),
+                                const Text(''),
                               ],
                             ),
                           ),
