@@ -98,7 +98,7 @@ class _login extends State<login> {
                             EmailController.text, PasswordController.text);
                         if (user != null) {
                           MyApp.currentUser = user;
-                          Navigator.of(context).push(PageRouteBuilder(
+                          Navigator.of(context).pushReplacement(PageRouteBuilder(
                               pageBuilder: (_, __, ___) => actualites()));
                         } else {
                           print("No User found.");

@@ -59,7 +59,7 @@ class _actualites extends State<actualites> {
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
                             pageBuilder: (_, __, ___) => actualites()));
@@ -74,7 +74,7 @@ class _actualites extends State<actualites> {
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
                             pageBuilder: (_, __, ___) => add_event_page()));
@@ -90,7 +90,7 @@ class _actualites extends State<actualites> {
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
                             pageBuilder: (_, __, ___) => calendrier()));
@@ -105,7 +105,7 @@ class _actualites extends State<actualites> {
                     size: 40,
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
                             pageBuilder: (_, __, ___) => profil()));

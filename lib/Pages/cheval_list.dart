@@ -134,7 +134,7 @@ class _cheval_list extends State<cheval_list> {
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
                             pageBuilder: (_, __, ___) => actualites()));
@@ -149,7 +149,7 @@ class _cheval_list extends State<cheval_list> {
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
                             pageBuilder: (_, __, ___) => add_event_page()));
@@ -165,7 +165,7 @@ class _cheval_list extends State<cheval_list> {
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
                             pageBuilder: (_, __, ___) => calendrier()));
@@ -180,7 +180,7 @@ class _cheval_list extends State<cheval_list> {
                     size: 40,
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
                             pageBuilder: (_, __, ___) => profil()));

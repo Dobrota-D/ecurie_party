@@ -2,6 +2,7 @@ import 'package:ecurie_party/Pages/actualites.dart';
 import 'package:ecurie_party/Pages/calendrier.dart';
 import 'package:ecurie_party/Pages/login.dart';
 import 'package:ecurie_party/Pages/profil.dart';
+import 'package:ecurie_party/main.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:ui';
@@ -45,27 +46,27 @@ class _profil extends State<profil> {
               elevation: 0,
               backgroundColor: _colorButton,
               centerTitle: true,
-              title: Text('Mon compte')),
+              title: const Text('Mon compte')),
           bottomNavigationBar: BottomAppBar(
             color: _colorFond,
 
             // <-- APPBAR WITH TRANSPARENT BG
             elevation: 0,
 
-            child: new Row(
+            child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
 
                 IconButton(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
                     Icons.article,
                     size: 40,
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
                             pageBuilder: (_, __, ___) => actualites()));
@@ -73,14 +74,14 @@ class _profil extends State<profil> {
                   },
                 ),
                 IconButton(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
                     Icons.add,
                     size: 40,
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
                             pageBuilder: (_, __, ___) => add_event_page()));
@@ -89,14 +90,14 @@ class _profil extends State<profil> {
                 ),
 
                 IconButton(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
                     Icons.calendar_month,
                     size: 40,
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
                             pageBuilder: (_, __, ___) => calendrier()));
@@ -104,14 +105,14 @@ class _profil extends State<profil> {
                   },
                 ),
                 IconButton(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
                     Icons.face,
                     color: _colorBottumNavBar,
                     size: 40,
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
                             pageBuilder: (_, __, ___) => profil()));
@@ -136,14 +137,14 @@ class _profil extends State<profil> {
                   ),
                 ),
                 Text(
-                  "Nom",
+                  MyApp.currentUser.name,
                   style: TextStyle(
                     fontSize: 30,
                     color: _colorFond,
                   ),
                 ),
                 Text(
-                  "Prénom",
+                  MyApp.currentUser.firstname,
                   style: TextStyle(
                     fontSize: 30,
                     color: _colorFond,
@@ -165,7 +166,7 @@ class _profil extends State<profil> {
                                     horizontal: 8, vertical: 16),
                                 child: TextFormField(
                                   decoration: InputDecoration(
-                                    border: UnderlineInputBorder(),
+                                    border: const UnderlineInputBorder(),
                                     fillColor: _colorButton,
                                     labelText: 'Nom',
                                   ),
@@ -183,7 +184,7 @@ class _profil extends State<profil> {
                                     horizontal: 8, vertical: 16),
                                 child: TextFormField(
                                   decoration: InputDecoration(
-                                    border: UnderlineInputBorder(),
+                                    border: const UnderlineInputBorder(),
                                     fillColor: _colorButton,
                                     labelText: 'Prénom',
                                   ),
@@ -201,7 +202,7 @@ class _profil extends State<profil> {
                                     horizontal: 8, vertical: 16),
                                 child: TextFormField(
                                   decoration: InputDecoration(
-                                    border: UnderlineInputBorder(),
+                                    border: const UnderlineInputBorder(),
                                     fillColor: _colorButton,
                                     labelText: 'Email',
                                   ),
@@ -219,7 +220,7 @@ class _profil extends State<profil> {
                                     horizontal: 8, vertical: 16),
                                 child: TextFormField(
                                   decoration: InputDecoration(
-                                    border: UnderlineInputBorder(),
+                                    border: const UnderlineInputBorder(),
                                     fillColor: _colorButton,
                                     labelText: 'Mot de passe',
                                   ),
@@ -237,7 +238,7 @@ class _profil extends State<profil> {
                                     horizontal: 8, vertical: 16),
                                 child: TextFormField(
                                   decoration: InputDecoration(
-                                    border: UnderlineInputBorder(),
+                                    border: const UnderlineInputBorder(),
                                     fillColor: _colorButton,
                                     labelText: 'URL photo',
                                   ),

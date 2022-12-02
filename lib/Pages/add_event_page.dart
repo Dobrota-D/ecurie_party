@@ -58,7 +58,7 @@ class _add_event_page extends State<add_event_page> {
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
                             pageBuilder: (_, __, ___) => actualites()));
@@ -73,7 +73,7 @@ class _add_event_page extends State<add_event_page> {
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
                             pageBuilder: (_, __, ___) => add_event_page()));
@@ -89,7 +89,7 @@ class _add_event_page extends State<add_event_page> {
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
                             pageBuilder: (_, __, ___) => calendrier()));
@@ -104,7 +104,7 @@ class _add_event_page extends State<add_event_page> {
                     size: 40,
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
                             pageBuilder: (_, __, ___) => profil()));

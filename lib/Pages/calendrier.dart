@@ -38,7 +38,7 @@ class _CalendarState extends State<calendrier> {
             // <-- APPBAR WITH TRANSPARENT BG
             elevation: 0,
 
-            child: new Row(
+            child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -51,7 +51,7 @@ class _CalendarState extends State<calendrier> {
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
                             pageBuilder: (_, __, ___) => actualites()));
@@ -66,7 +66,7 @@ class _CalendarState extends State<calendrier> {
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
                             pageBuilder: (_, __, ___) => add_event_page()));
@@ -82,7 +82,7 @@ class _CalendarState extends State<calendrier> {
                     color: _colorBottumNavBar,
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
                             pageBuilder: (_, __, ___) => calendrier()));
@@ -97,7 +97,7 @@ class _CalendarState extends State<calendrier> {
                     size: 40,
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
                             pageBuilder: (_, __, ___) => profil()));
