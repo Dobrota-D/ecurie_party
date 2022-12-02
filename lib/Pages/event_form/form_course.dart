@@ -1,6 +1,9 @@
 import 'package:ecurie_party/Pages/actualites.dart';
 import 'package:ecurie_party/Pages/event_form/event_form.dart';
 import 'package:ecurie_party/Pages/profil.dart';
+import 'package:ecurie_party/db/event_controller.dart';
+import 'package:ecurie_party/main.dart';
+import 'package:ecurie_party/models/course.dart';
 import 'package:ecurie_party/tools/constants.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
@@ -106,9 +109,9 @@ class _FormCourse extends State<FormCourse> with EventForm {
                               timeVal != null ? convertTime(timeVal) : ''));
                     }),
                 DropdownButton(
-                    hint: const Text(
-                      "Discipline",
-                      style: TextStyle(color: Colors.blue),
+                    hint: Text(
+                      _dropDownDiscipline,
+                      style: const TextStyle(color: Colors.blue),
                     ),
                     isExpanded: true,
                     iconSize: 30.0,
@@ -129,9 +132,9 @@ class _FormCourse extends State<FormCourse> with EventForm {
                       );
                     }),
                 DropdownButton(
-                    hint: const Text(
-                      "Adresse",
-                      style: TextStyle(color: Colors.blue),
+                    hint: Text(
+                      _dropDownLocation,
+                      style: const TextStyle(color: Colors.blue),
                     ),
                     isExpanded: true,
                     iconSize: 30.0,
@@ -148,10 +151,9 @@ class _FormCourse extends State<FormCourse> with EventForm {
                       setState(() { _dropDownLocation = val!; });
                     }),
                 submitButton(context, () {
-                  print(timeSubShort.value);
-                  print(dateSub.value);
-                  print(formKey.currentState!.validate());
-                  if (timeSubShort.value != null && dateSub.value != null && formKey.currentState!.validate() && _dropDownLocation.isNotEmpty && _dropDownDiscipline.isNotEmpty) {
+                  if (timeSubShort.value != null && dateSub.value != null && formKey.currentState!.validate() && _dropDownLocation != "Adresse" && _dropDownDiscipline != "Discipline") {
+                    Course event = Course(0, eventNameController.text, EventController.course, 1, [], dateSub.value!, _dropDownLocation, false, "Terre battue", timeSubShort.value!.toString(), _dropDownDiscipline);
+                    EventController.prepare(MyApp.myDb, event);
                     Navigator.of(context).pop();
                   }
                 }),

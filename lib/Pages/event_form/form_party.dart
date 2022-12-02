@@ -1,6 +1,9 @@
 import 'package:ecurie_party/Pages/actualites.dart';
 import 'package:ecurie_party/Pages/event_form/event_form.dart';
 import 'package:ecurie_party/Pages/profil.dart';
+import 'package:ecurie_party/db/event_controller.dart';
+import 'package:ecurie_party/main.dart';
+import 'package:ecurie_party/models/party.dart';
 import 'package:ecurie_party/tools/constants.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
@@ -25,7 +28,7 @@ class _FormParty extends State<FormParty> with EventForm {
   TextEditingController eventNameController = TextEditingController();
   TextEditingController adressController = TextEditingController();
 
-  String _dropDownEvent = "";
+  String _dropDownEvent = "Thème de la soirée";
 
   @override
   Widget build(BuildContext context) {
@@ -64,9 +67,9 @@ class _FormParty extends State<FormParty> with EventForm {
                     validator: validator,
                   ),
                   DropdownButton(
-                      hint: const Text(
-                        "Thème de la soirée",
-                        style: TextStyle(color: Colors.blue),
+                      hint: Text(
+                        _dropDownEvent,
+                        style: const TextStyle(color: Colors.blue),
                       ),
                       isExpanded: true,
                       iconSize: 30.0,
@@ -131,11 +134,9 @@ class _FormParty extends State<FormParty> with EventForm {
                                 timeVal != null ? convertTime(timeVal) : ''));
                       }),
                   submitButton(context,() {
-                    print(timeSubShort.value);
-                    print(dateSub.value);
-                    print(_dropDownEvent);
-                    print(formKey.currentState!.validate());
-                    if (timeSubShort.value != null && dateSub.value != null && formKey.currentState!.validate() && _dropDownEvent.isNotEmpty) {
+                    if (timeSubShort.value != null && dateSub.value != null && formKey.currentState!.validate() && _dropDownEvent != "Thème de la soirée") {
+                      Party event = Party(0, eventNameController.text, EventController.party, 1, [], dateSub.value!, adressController.text, false, _dropDownEvent);
+                      EventController.prepare(MyApp.myDb, event);
                       Navigator.of(context).pop();
                     }
                   }),

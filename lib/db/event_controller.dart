@@ -1,20 +1,22 @@
 import 'package:ecurie_party/db/database.dart';
+import 'package:ecurie_party/db/logController.dart';
 import 'package:ecurie_party/models/course.dart';
 import 'package:ecurie_party/models/event.dart';
+import 'package:ecurie_party/models/log.dart';
 import 'package:ecurie_party/models/party.dart';
 import 'package:ecurie_party/models/tournament.dart';
 
 class EventController {
   static const String collectionName = "event";
 
-  static const String tournament = "tournament";
-  static const String party = "party";
-  static const String course = "course";
+  static const String tournament = "Tournament";
+  static const String party = "Party";
+  static const String course = "Course";
 
   //Event object is initialise but it's missing some data
   static void prepare(DataBase db, Event event){
-
     EventController._create(db, event);
+    LogController.create(db, Log(0, DateTime.now(), event.name, "${event.eventType} - ${event.date}"));
   }
 
   static void _create(DataBase db, Event event){

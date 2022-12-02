@@ -1,5 +1,8 @@
 import 'package:ecurie_party/Pages/actualites.dart';
 import 'package:ecurie_party/Pages/profil.dart';
+import 'package:ecurie_party/db/event_controller.dart';
+import 'package:ecurie_party/main.dart';
+import 'package:ecurie_party/models/tournament.dart';
 import 'package:ecurie_party/tools/constants.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
@@ -23,7 +26,7 @@ class _FormTournament extends State<FormTournament> with EventForm {
   TextEditingController eventNameController = TextEditingController();
   TextEditingController eventImageController = TextEditingController();
 
-  String _dropDownLocation = "";
+  String _dropDownLocation = "Adresse";
 
   @override
   Widget build(BuildContext context) {
@@ -123,9 +126,9 @@ class _FormTournament extends State<FormTournament> with EventForm {
                               timeVal != null ? convertTime(timeVal) : ''));
                     }),
                 DropdownButton(
-                    hint: const Text(
-                      "Adresse",
-                      style: TextStyle(color: Colors.blue),
+                    hint: Text(
+                      _dropDownLocation,
+                      style: const TextStyle(color: Colors.blue),
                     ),
                     isExpanded: true,
                     iconSize: 30.0,
@@ -176,10 +179,9 @@ class _FormTournament extends State<FormTournament> with EventForm {
                   title: const Text("Grand galop"),
                 ),
                 submitButton(context, () {
-                  print(timeSubShort.value);
-                  print(dateSub.value);
-                  print(formKey.currentState!.validate());
-                  if (timeSubShort.value != null && dateSub.value != null && formKey.currentState!.validate() && (check3! || check2! || check1!) && _dropDownLocation.isNotEmpty) {
+                  if (timeSubShort.value != null && dateSub.value != null && formKey.currentState!.validate() && (check3! || check2! || check1!) && _dropDownLocation != "Adresse") {
+                    Tournament event = Tournament(0, eventNameController.text, EventController.tournament, 1, [], dateSub.value!, _dropDownLocation, false, eventImageController.text, []);
+                    EventController.prepare(MyApp.myDb, event);
                     Navigator.of(context).pop();
                   }
                 }),
