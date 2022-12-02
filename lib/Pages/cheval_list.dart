@@ -1,13 +1,13 @@
 import 'package:ecurie_party/Pages/profil.dart';
-import 'package:ecurie_party/models/user.dart';
+import 'package:ecurie_party/main.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
-
+import 'package:ecurie_party/models/horse.dart';
 import 'actualites.dart';
 import 'add_event_page.dart';
 import 'calendrier.dart';
+import 'package:ecurie_party/db/cheval_controller.dart';
 
 class cheval_list extends StatefulWidget {
   @override
@@ -19,7 +19,7 @@ class cheval_list extends StatefulWidget {
 class _cheval_list extends State<cheval_list> {
 
   bool? isHere = false;
-  Widget CreateCard(User user) {
+  Widget CreateCard(Horse horse) {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
@@ -37,13 +37,24 @@ class _cheval_list extends State<cheval_list> {
                 //image
               ),
             ),
-            title: Text('Nom',
+            title: Text(horse.name,
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 )),
-            subtitle: Text('Cavalier',
-                style: TextStyle(color: Colors.white)),
+            subtitle: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Propriétaire : " + horse.owner,
+                    style: TextStyle(color: Colors.white)),
+                Text("Pelage : " + horse.color,
+                    style: TextStyle(color: Colors.white)),
+                Text("Âge : " + horse.age.toString(),
+                    style: TextStyle(color: Colors.white))
+
+              ],
+            )
+
           ),
 
 
@@ -63,11 +74,11 @@ class _cheval_list extends State<cheval_list> {
     );
   }
 
-  var list_card = [];
+   var list_card = [];
 
-  void RefreshList(User user) {
+  void RefreshList(Horse horse) {
     setState(() {
-      list_card.add(CreateCard(user));
+      list_card.add(horse);
     });
   }
 
@@ -79,8 +90,15 @@ class _cheval_list extends State<cheval_list> {
   Color _colorButton = const Color(0xFF730800);
   Color _colorBottumNavBar = const Color(0xFF8D6E63);
 
+  getDbHorse() async {
+    List<Horse> temp = await HorseController.getListHorse(MyApp.myDb);
+    setState(() {
+      list_card = temp;
+    });
+  }
   @override
   Widget build(BuildContext context) {
+    getDbHorse();
     return Stack(
       children: [
         Container(
@@ -103,7 +121,7 @@ class _cheval_list extends State<cheval_list> {
             // <-- APPBAR WITH TRANSPARENT BG
             elevation: 0,
 
-            child: new Row(
+            child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -177,7 +195,7 @@ class _cheval_list extends State<cheval_list> {
           body: ListView.builder(
               itemCount: list_card.length,
               itemBuilder: (BuildContext context, int index) {
-                return list_card[index];
+                return CreateCard(list_card[index]);
 
               }),
         ),

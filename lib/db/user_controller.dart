@@ -1,4 +1,5 @@
-import 'package:ecurie_party/models/user.dart';
+
+import '../models/user.dart';
 
 import 'database.dart';
 
@@ -38,5 +39,13 @@ class UserController {
 
   static User _userController(Map<String, dynamic> data) {
     return User.init(data);
+  }
+  static Future<List<User>> getListUser(DataBase db) async {
+    List<User> users = [];
+    List<Map<String, dynamic>> listUsers = await db.getCollection(collectionName);
+    for (var horse in listUsers){
+      users.add(_userController(horse));
+    }
+    return users;
   }
 }

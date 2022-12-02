@@ -1,22 +1,24 @@
 import 'package:ecurie_party/Pages/profil.dart';
-import 'package:ecurie_party/models/user.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
-
+import '../main.dart';
 import 'actualites.dart';
 import 'add_event_page.dart';
 import 'calendrier.dart';
+import 'package:ecurie_party/models/user.dart';
+import 'package:ecurie_party/db/user_controller.dart';
 
-class cavalier_list extends StatefulWidget {
+class user_list extends StatefulWidget {
+  const user_list({super.key});
+
   @override
   State<StatefulWidget> createState() {
-    return _cavalier_list();
+    return _user_list();
   }
 }
 
-class _cavalier_list extends State<cavalier_list> {
+class _user_list extends State<user_list> {
 
   bool? isHere = false;
   Widget CreateCard(User user) {
@@ -37,15 +39,16 @@ class _cavalier_list extends State<cavalier_list> {
                 //image
               ),
             ),
-            title: Text('Nom',
+            title: Text(user.name,
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 )),
-            subtitle: Text('Prénom',
+            subtitle: Text(user.firstname,
                 style: TextStyle(color: Colors.white)),
           ),
           Visibility(
+            visible: false,
             child:
             CheckboxListTile(
               value: isHere,
@@ -55,7 +58,7 @@ class _cavalier_list extends State<cavalier_list> {
                 });
               },
 
-            ), visible: false,),
+            ),),
         ],
 
       ),
@@ -66,16 +69,25 @@ class _cavalier_list extends State<cavalier_list> {
 
   void RefreshList(User user) {
     setState(() {
-      list_card.add(CreateCard(user));
+      list_card.add(user);
     });
   }
+  bool? valid = false;
 
   Color _colorFond = const Color(0xFFFFF3E0);
   Color _colorButton = const Color(0xFF730800);
   Color _colorBottumNavBar = const Color(0xFF8D6E63);
 
+  getDbUser() async {
+    List<User> temp = await UserController.getListUser(MyApp.myDb);
+    setState(() {
+      list_card = temp;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    getDbUser();
     return Stack(
       children: [
         Container(
@@ -98,7 +110,7 @@ class _cavalier_list extends State<cavalier_list> {
             // <-- APPBAR WITH TRANSPARENT BG
             elevation: 0,
 
-            child: new Row(
+            child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -172,7 +184,7 @@ class _cavalier_list extends State<cavalier_list> {
           body: ListView.builder(
               itemCount: list_card.length,
               itemBuilder: (BuildContext context, int index) {
-                return list_card[index];
+                return CreateCard(list_card[index]);
 
               }),
         ),

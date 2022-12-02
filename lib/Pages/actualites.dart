@@ -47,11 +47,10 @@ class _actualites extends State<actualites> {
             // <-- APPBAR WITH TRANSPARENT BG
             elevation: 0,
 
-            child: new Row(
+            child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-
                 IconButton(
                   padding: EdgeInsets.symmetric(horizontal: 30),
                   icon: Icon(
@@ -127,7 +126,7 @@ class _actualites extends State<actualites> {
                       Navigator.push(
                           context,
                           PageRouteBuilder(
-                              pageBuilder: (_, __, ___) => cavalier_list()));
+                              pageBuilder: (_, __, ___) => user_list()));
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.transparent,
@@ -181,7 +180,8 @@ class _actualites extends State<actualites> {
                       context: context,
                       builder: (BuildContext context) => AlertDialog(
                             backgroundColor: _colorFond,
-                            title:  Text("Infos", style: TextStyle(color: _colorBottumNavBar)),
+                            title: Text("Infos",
+                                style: TextStyle(color: _colorBottumNavBar)),
                             content: Form(
                               key: _formKey,
                               child: Column(
@@ -218,7 +218,8 @@ class _actualites extends State<actualites> {
                                     ),
                                   ),
                                   Text(
-                                    "\nListe des participants: \n\nPepito \nGranola \nPetit Lu", textAlign: TextAlign.left,
+                                    "\nListe des participants: \n\nPepito \nGranola \nPetit Lu",
+                                    textAlign: TextAlign.left,
                                     style: TextStyle(
                                       fontSize: 15,
                                       color: _colorBottumNavBar,
@@ -232,7 +233,9 @@ class _actualites extends State<actualites> {
                                         Navigator.of(context).pop();
                                       });
                                     },
-                                    title: Text("Je participe",  style: TextStyle(color: _colorBottumNavBar)),
+                                    title: Text("Je participe",
+                                        style: TextStyle(
+                                            color: _colorBottumNavBar)),
                                   ),
                                 ],
                               ),
@@ -260,6 +263,7 @@ class _actualites extends State<actualites> {
                               style: TextStyle(color: _colorBottumNavBar)),
                         ),
                         Visibility(
+                          visible: false,
                           child: CheckboxListTile(
                             value: isHere,
                             onChanged: (bool? value) {
@@ -268,292 +272,6 @@ class _actualites extends State<actualites> {
                               });
                             },
                           ),
-                          visible: false,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) => AlertDialog(
-                            backgroundColor: _colorFond,
-                            title:  Text("Infos",  style: TextStyle(color: _colorBottumNavBar)),
-                            content: Form(
-                              key: _formKey,
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 16),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      child: Image.network(
-                                        'https://www.bowdenpr.co.uk/wp-content/uploads/2020/05/Hollie-Doyle-Flat-Jockey-297x300.jpg',
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    "Concours Grand Galop",textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontSize: 30,
-                                      color: _colorBottumNavBar,
-                                    ),
-                                  ),
-                                  Text(
-                                    "\nConflans",textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: _colorBottumNavBar,
-                                    ),
-                                  ),
-                                  Text(
-                                    "\n12/12 à 13:00",textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontSize: 17,
-                                      color: _colorBottumNavBar,
-                                    ),
-                                  ),
-
-                                  Text(
-                                    "\nListe des participants: \n\nPepito \nGranola \nPetit Lu", textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      color: _colorBottumNavBar,
-                                    ),
-                                  ),
-                                  CheckboxListTile(
-                                    value: participation,
-                                    onChanged: (bool? value) {
-                                      setState(() {
-                                        participation = value;
-                                        Navigator.of(context).pop();
-                                      });
-                                    },
-                                    title: Text("Je participe",  style: TextStyle(color: _colorBottumNavBar)),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ));
-                },
-                child: Container(
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    color: _colorFond,
-                    elevation: 10,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ListTile(
-                          leading: ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: Image.network(
-                              'https://www.bowdenpr.co.uk/wp-content/uploads/2020/05/Hollie-Doyle-Flat-Jockey-297x300.jpg',
-                            ),
-                          ),
-                          title: Text('Concours grand galop',
-                              style: TextStyle(
-                                color: _colorBottumNavBar,
-                                fontWeight: FontWeight.bold,
-                              )),
-                          subtitle: Text('12/12 à 13:00 Conflans',
-                              style: TextStyle(color: _colorBottumNavBar)),
-                        ),
-                        Visibility(
-                          child: CheckboxListTile(
-                            value: isHere,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                isHere = value;
-                              });
-                            },
-                          ),
-                          visible: false,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) => AlertDialog(
-                            backgroundColor: _colorFond,
-                            title:  Text("Infos" ,  style: TextStyle(color: _colorBottumNavBar)),
-                            content: Form(
-                              key: _formKey,
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 16),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      child: Image.network(
-                                        'https://photos.gammvert.fr/v5/products/fiche_590/50912-barbecue-charbon-weber-master-touch-e-5770-57-cm-noir-14.jpg',
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    "Repas : la boucherie chevaline",
-                                    style: TextStyle(
-                                      fontSize: 30,
-                                      color: _colorBottumNavBar,
-                                    ),
-                                  ),
-                                  Text(
-                                    "\n16/12 à 19:00",textAlign: TextAlign.left,
-                                    style: TextStyle(
-
-                                      fontSize: 17,
-                                      color: _colorBottumNavBar,
-                                    ),
-                                  ),
-
-                                  Text(
-                                    "\nListe des participants: \n\nPepito \nGranola \nPetit Lu", textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      color: _colorBottumNavBar,
-                                    ),
-                                  ),
-                                  CheckboxListTile(
-                                    value: participation,
-                                    onChanged: (bool? value) {
-                                      setState(() {
-                                        participation = value;
-                                        Navigator.of(context).pop();
-                                      });
-                                    },
-                                    title: Text("Je participe",  style: TextStyle(color: _colorBottumNavBar, )),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ));
-                },
-                child: Container(
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    color: _colorFond,
-                    elevation: 17,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ListTile(
-                          title: Text('Repas : La boucherie chevaline',
-                              style: TextStyle(
-                                color: _colorBottumNavBar,
-                                fontWeight: FontWeight.bold,
-                              )),
-                          subtitle: Text('16/12 à 19:00',
-                              style: TextStyle(
-                                color: _colorBottumNavBar,
-                              )),
-                        ),
-                        Visibility(
-                          child: CheckboxListTile(
-                            value: isHere,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                isHere = value;
-                              });
-                            },
-                          ),
-                          visible: false,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) => AlertDialog(
-                            backgroundColor: _colorFond,
-                            title:  Text("Infos",  style: TextStyle(color: _colorBottumNavBar)),
-                            content: Form(
-                              key: _formKey,
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 16),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      child: Image.network(
-                                        'https://www.bowdenpr.co.uk/wp-content/uploads/2020/05/Hollie-5-300x225.jpg',
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    "Nom Prénom",
-                                    style: TextStyle(
-                                      fontSize: 30,
-                                      color: _colorBottumNavBar,
-                                    ),
-                                  ),
-                                  Text(
-                                    "\nEmail",
-                                    style: TextStyle(
-                                      fontSize: 17,
-                                      color: _colorBottumNavBar,
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                            ),
-                          ));
-                },
-                child: Container(
-                  width: 500,
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    color: _colorFond,
-                    elevation: 10,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ListTile(
-                          leading: ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: Image.network(
-                              'https://www.bowdenpr.co.uk/wp-content/uploads/2020/05/Hollie-5-300x225.jpg',
-                            ),
-                          ),
-                          title: Text('Nom',
-                              style: TextStyle(
-                                color: _colorBottumNavBar,
-                                fontWeight: FontWeight.bold,
-                              )),
-                          subtitle: Text('Prenom',
-                              style: TextStyle(color: _colorBottumNavBar)),
-                        ),
-                        Visibility(
-                          child: CheckboxListTile(
-                            value: isHere,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                isHere = value;
-                              });
-                            },
-                          ),
-                          visible: false,
                         ),
                       ],
                     ),
