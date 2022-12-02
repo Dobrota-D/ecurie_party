@@ -89,6 +89,7 @@ class _cheval_list extends State<cheval_list> {
           ),
         ),
         Scaffold(
+          resizeToAvoidBottomInset: false,
           backgroundColor: Colors.transparent,
           // <-- SCAFFOLD WITH TRANSPARENT BG
           appBar: AppBar(

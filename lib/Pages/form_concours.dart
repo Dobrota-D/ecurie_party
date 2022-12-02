@@ -50,6 +50,7 @@ class _form_concours extends State<form_concours> {
           decoration: BoxDecoration(color: _colorFond),
         ),
         Scaffold(
+          resizeToAvoidBottomInset: false,
           backgroundColor: Colors.transparent,
           // <-- SCAFFOLD WITH TRANSPARENT BG
           appBar: AppBar(

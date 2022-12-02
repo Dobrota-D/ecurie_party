@@ -42,6 +42,7 @@ class _form_cours extends State<form_cours> {
           decoration: BoxDecoration(color: _colorFond),
         ),
         Scaffold(
+          resizeToAvoidBottomInset: false,
           backgroundColor: Colors.transparent,
           appBar: AppBar(
               backgroundColor: _colorButton,

@@ -40,7 +40,7 @@ class _login extends State<login> {
         Scaffold(
           backgroundColor: Colors.transparent,
           // <-- SCAFFOLD WITH TRANSPARENT BG
-
+          resizeToAvoidBottomInset: false,
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
