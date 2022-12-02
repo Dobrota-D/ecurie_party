@@ -6,12 +6,18 @@ class UserController {
   static const String collectionName = "users";
 
   static Future<User?> getLoger(DataBase db, String mail, String pwd) async {
-    List<Map<String, dynamic>> list = await db.get(collectionName, {"email": mail, "password": pwd});
+    List<Map<String, dynamic>> list =
+        await db.get(collectionName, {"mail": mail, "pwd": pwd});
     return list.isNotEmpty ? _userController(list.first) : null;
   }
 
+  // registration of a new user in the database
+  static void registerUser(DataBase db, User user) {
+    db.insert(collectionName, user.toJson());
+  }
+
   // update the user's name
-  static void updateUserName(DataBase db, int idUser, String name) async{
+  static void updateUserName(DataBase db, int idUser, String name) async {
     await db.update(collectionName, {"id": idUser}, {"name": name});
   }
 
@@ -29,7 +35,6 @@ class UserController {
   static void deleteUser(DataBase db, int idUser) async {
     await db.delete(collectionName, {"id": idUser});
   }
-
 
   static User _userController(Map<String, dynamic> data) {
     return User.init(data);

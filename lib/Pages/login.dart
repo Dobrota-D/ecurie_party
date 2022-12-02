@@ -54,7 +54,7 @@ class _login extends State<login> {
                       fit: BoxFit.fill),
                   Padding(
                     padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: TextFormField(
                       decoration: InputDecoration(
                         border: UnderlineInputBorder(),
@@ -73,7 +73,8 @@ class _login extends State<login> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: TextFormField(
                       obscureText: true,
                       decoration: InputDecoration(
@@ -92,13 +93,13 @@ class _login extends State<login> {
                   ),
                   ElevatedButton(
                     onPressed: () async {
-                      if (_fomKeyLogin.currentState!.validate()){
-                        User? user = await UserController.getLoger(MyApp.myDb, EmailController.text, PasswordController.text);
-                        if (user != null){
+                      if (_fomKeyLogin.currentState!.validate()) {
+                        User? user = await UserController.getLoger(MyApp.myDb,
+                            EmailController.text, PasswordController.text);
+                        if (user != null) {
                           MyApp.currentUser = user;
-                          Navigator.of(context).push(
-                              PageRouteBuilder(
-                                  pageBuilder: (_, __, ___) => actualites()));
+                          Navigator.of(context).push(PageRouteBuilder(
+                              pageBuilder: (_, __, ___) => actualites()));
                         } else {
                           print("No User found.");
                         }
@@ -224,32 +225,27 @@ class _login extends State<login> {
                             ElevatedButton(
                               onPressed: () async {
                                 var name = NameController.text;
-                                var firstName = FirstnameController.text;
                                 var email = EmailController.text;
-                                var pwd = PasswordController.text;
-                                var imageUrl = ImageController.text;
 
                                 if (_formKey.currentState!.validate()) {
                                   if (!await isUserExists(email, name)) {
-                                    MyApp.myDb.createElement('users', {
-                                      "name": name,
-                                      "first name": firstName,
-                                      "password": pwd,
-                                      "email": email,
-                                      "profileImg": imageUrl
-                                    }).then((value) {
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => actualites()),
-                                      );
-                                    });
+                                    UserController.registerUser(
+                                        MyApp.myDb,
+                                        User(0,
+                                            FirstnameController.text,
+                                            NameController.text,
+                                            email,
+                                            PasswordController.text,
+                                            ImageController.text,
+                                            false));
+                                    Navigator.of(context).pop();
                                   }
                                 }
                               },
                               style: ElevatedButton.styleFrom(
                                 primary: Colors.transparent,
-                                shadowColor: Colors.transparent.withOpacity(0.1),
+                                shadowColor:
+                                    Colors.transparent.withOpacity(0.1),
                               ),
                               child: Container(
                                 color: _colorButton,

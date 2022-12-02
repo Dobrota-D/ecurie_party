@@ -28,11 +28,12 @@ class _FormTournament extends State<FormTournament> with EventForm {
 
   String _dropDownLocation = "Adresse";
 
+  bool check1 = false;
+  bool check2 = false;
+  bool check3 = false;
+
   @override
   Widget build(BuildContext context) {
-    bool? check1 = false;
-    bool? check2 = false;
-    bool? check3 = false;
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -152,9 +153,7 @@ class _FormTournament extends State<FormTournament> with EventForm {
                   //checkbox positioned at right
                   value: check1,
                   onChanged: (bool? value) {
-                    setState(() {
-                      check1 = value;
-                    });
+                    setState(() => check1 = value!);
                   },
                   title: const Text("Petit pas"),
                 ),
@@ -162,9 +161,7 @@ class _FormTournament extends State<FormTournament> with EventForm {
                   //checkbox positioned at right
                   value: check2,
                   onChanged: (bool? value) {
-                    setState(() {
-                      check2 = value;
-                    });
+                    setState(() => check2 = value!);
                   },
                   title: const Text("Moyen trot"),
                 ),
@@ -172,9 +169,7 @@ class _FormTournament extends State<FormTournament> with EventForm {
                   //checkbox positioned at right
                   value: check3,
                   onChanged: (bool? value) {
-                    setState(() {
-                      check3 = value;
-                    });
+                    setState(() => check3 = value!);
                   },
                   title: const Text("Grand galop"),
                 ),
