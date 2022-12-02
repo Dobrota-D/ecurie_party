@@ -12,4 +12,9 @@ class User extends DbCollection{
 
   User(this.id, this.firstname, this.name, this.mail, this.pwd, this.userType,
       this.isAdmin);
+
+  static User init(Map<String, dynamic> data){
+    return User(data["id"], data["firstname"], data["name"],
+        data["mail"], data["pwd"], data["userType"], data["isAdmin"]);
+  }
 }

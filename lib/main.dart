@@ -1,4 +1,5 @@
 import 'package:ecurie_party/db/database.dart';
+import 'package:ecurie_party/models/user.dart';
 import 'package:flutter/material.dart';
 
 import 'Pages/login.dart';
@@ -12,6 +13,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   static final DataBase myDb = DataBase("dbAdmin", "dbAdminPassword", "cluster0.oljmo2v.mongodb.net", "");
+  static late User currentUser;
 
   // This widget is the root of your application.
   @override

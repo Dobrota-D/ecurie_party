@@ -152,7 +152,7 @@ class _FormCourse extends State<FormCourse> with EventForm {
                     }),
                 submitButton(context, () {
                   if (timeSubShort.value != null && dateSub.value != null && formKey.currentState!.validate() && _dropDownLocation != "Adresse" && _dropDownDiscipline != "Discipline") {
-                    Course event = Course(0, eventNameController.text, EventController.course, 1, [], dateSub.value!, _dropDownLocation, false, "Terre battue", timeSubShort.value!.toString(), _dropDownDiscipline);
+                    Course event = Course(0, eventNameController.text, EventController.course, MyApp.currentUser.id, [], dateSub.value!, _dropDownLocation, false, "Terre battue", timeSubShort.value!.toString(), _dropDownDiscipline);
                     EventController.prepare(MyApp.myDb, event);
                     Navigator.of(context).pop();
                   }

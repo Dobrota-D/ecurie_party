@@ -135,7 +135,7 @@ class _FormParty extends State<FormParty> with EventForm {
                       }),
                   submitButton(context,() {
                     if (timeSubShort.value != null && dateSub.value != null && formKey.currentState!.validate() && _dropDownEvent != "Thème de la soirée") {
-                      Party event = Party(0, eventNameController.text, EventController.party, 1, [], dateSub.value!, adressController.text, false, _dropDownEvent);
+                      Party event = Party(0, eventNameController.text, EventController.party, MyApp.currentUser.id, [], dateSub.value!, adressController.text, false, _dropDownEvent);
                       EventController.prepare(MyApp.myDb, event);
                       Navigator.of(context).pop();
                     }

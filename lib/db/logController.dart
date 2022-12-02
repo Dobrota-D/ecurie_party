@@ -5,22 +5,22 @@ import 'database.dart';
 class LogController {
   static const String collectionName = "log";
 
-  static Log getLog(DataBase db, int idLog){
-   return LogController._logController(db.get(collectionName, {"id": idLog}));
+  static Future<Log> getLog(DataBase db, int idLog) async {
+   return LogController._logController(await db.get(collectionName, {"id": idLog}));
 
   }
 
-  static List<Log> getListLog(DataBase db){
+  static Future<List<Log>> getListLog(DataBase db) async {
     List<Log> logs = [];
-    List<Map<String, dynamic>> listLog = db.getCollection(collectionName);
+    List<Map<String, dynamic>> listLog = await db.getCollection(collectionName);
     for (var log in listLog){
       logs.add(_logController(log));
     }
     return logs;
   }
 
-  static void create(DataBase db, Log log){
-    db.insert(collectionName, log.toJson());
+  static void create(DataBase db, Log log) async {
+    await db.insert(collectionName, log.toJson());
   }
 
   static Log _logController(Map<String, dynamic> data){

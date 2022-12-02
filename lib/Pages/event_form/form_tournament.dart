@@ -180,7 +180,7 @@ class _FormTournament extends State<FormTournament> with EventForm {
                 ),
                 submitButton(context, () {
                   if (timeSubShort.value != null && dateSub.value != null && formKey.currentState!.validate() && (check3! || check2! || check1!) && _dropDownLocation != "Adresse") {
-                    Tournament event = Tournament(0, eventNameController.text, EventController.tournament, 1, [], dateSub.value!, _dropDownLocation, false, eventImageController.text, []);
+                    Tournament event = Tournament(0, eventNameController.text, EventController.tournament, MyApp.currentUser.id, [], dateSub.value!, _dropDownLocation, false, eventImageController.text, []);
                     EventController.prepare(MyApp.myDb, event);
                     Navigator.of(context).pop();
                   }

@@ -21,14 +21,6 @@ class DataBase {
 
     return await collection.find().toList();
   }
-/*
-  getLimit(String collectionName, Map<String, dynamic> selector, int limit) async{
-    if (db == null){ await _init(); }
-    DbCollection collection = db.collection(collectionName);
-
-    return await collection.find(selector).toList();
-  }
-*/
   get(String collectionName, Map<String, dynamic> selector) async{
     if (db == null){ await _init(); }
     DbCollection collection = db.collection(collectionName);
