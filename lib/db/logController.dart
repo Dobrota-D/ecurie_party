@@ -2,11 +2,11 @@ import '../models/log.dart';
 import 'database.dart';
 
 
-class logController {
-  static final String collectionName = "log";
+class LogController {
+  static const String collectionName = "log";
 
   static Log getLog(DataBase db, int idLog){
-   return logController._logController(db.get(collectionName, {"id": idLog}));
+   return LogController._logController(db.get(collectionName, {"id": idLog}));
 
   }
 
@@ -17,6 +17,10 @@ class logController {
       logs.add(_logController(log));
     }
     return logs;
+  }
+
+  static void create(DataBase db, Log log){
+    db.insert(collectionName, log.toJson());
   }
 
   static Log _logController(Map<String, dynamic> data){

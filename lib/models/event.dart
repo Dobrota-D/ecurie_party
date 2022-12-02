@@ -9,12 +9,13 @@ class Event extends DbCollection{
   List<int> horsemenList;
   DateTime date;
   String location;
+  bool isAuthorise;
 
   Event(this.id, this.name, this.eventType, this.idUser, this.horsemenList,
-      this.date, this.location);
+      this.date, this.location, this.isAuthorise);
 
   static Event init(Map<String, dynamic> data){
     return Event(data["id"], data["name"], data["eventType"],
-        data["idUser"], data["horsemenList"], data["date"], data["location"]);
+        data["idUser"], data["horsemenList"], data["date"], data["location"], data["isAuthorise"]);
   }
 }

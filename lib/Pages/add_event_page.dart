@@ -1,16 +1,11 @@
 import 'package:ecurie_party/Pages/actualites.dart';
 import 'package:ecurie_party/Pages/calendrier.dart';
-import 'package:ecurie_party/Pages/form_event.dart';
+import 'package:ecurie_party/Pages/event_form/form_party.dart';
 import 'package:ecurie_party/Pages/profil.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
-import 'dart:ui';
-import 'package:flutter/cupertino.dart';
 
-import 'package:ecurie_party/Pages/calendrier.dart';
-
-import 'form_concours.dart';
-import 'form_cours.dart';
+import 'event_form/form_tournament.dart';
+import 'event_form/form_course.dart';
 
 class add_event_page extends StatefulWidget {
   @override
@@ -24,7 +19,6 @@ class _add_event_page extends State<add_event_page> {
   Color _colorButton = const Color(0xFF730800);
   Color _colorBottumNavBar = const Color(0xFF8D6E63);
 
-  final _formKey = GlobalKey<FormState>();
   TextEditingController NameController = TextEditingController();
   TextEditingController FirstnameController = TextEditingController();
   TextEditingController MailController = TextEditingController();
@@ -44,13 +38,13 @@ class _add_event_page extends State<add_event_page> {
           appBar: AppBar(
               backgroundColor: _colorButton,
               centerTitle: true,
-              title: Text('Créer des évènements')),
+              title: const Text('Créer des évènements')),
           bottomNavigationBar: BottomAppBar(
             color: _colorFond,
             // <-- APPBAR WITH TRANSPARENT BG
             elevation: 0,
 
-            child: new Row(
+            child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -124,8 +118,7 @@ class _add_event_page extends State<add_event_page> {
                           Navigator.push(
                               context,
                               PageRouteBuilder(
-                                  pageBuilder: (_, __, ___) =>
-                                      form_concours()));
+                                  pageBuilder: (_, __, ___) => FormTournament()));
                         },
                         child: Container(
                           width: 500,
@@ -140,7 +133,7 @@ class _add_event_page extends State<add_event_page> {
                               children: const [
                                 ListTile(
                                   leading: Icon(Icons.add, size: 70),
-                                  title: Text('Ajouter une course',
+                                  title: Text('Organiser une compétition',
                                       style: TextStyle(color: Colors.white)),
                                 ),
                                 Text('', style: TextStyle(color: Colors.white)),
@@ -154,7 +147,7 @@ class _add_event_page extends State<add_event_page> {
                           Navigator.push(
                               context,
                               PageRouteBuilder(
-                                  pageBuilder: (_, __, ___) => form_event()));
+                                  pageBuilder: (_, __, ___) => const FormParty()));
                         },
                         child: Container(
                           width: 500,
@@ -169,7 +162,7 @@ class _add_event_page extends State<add_event_page> {
                               children: const [
                                 ListTile(
                                   leading: Icon(Icons.add, size: 70),
-                                  title: Text('Ajouter un évènement',
+                                  title: Text('Organiser une soirée',
                                       style: TextStyle(color: Colors.white)),
                                 ),
                                 Text('', style: TextStyle(color: Colors.white)),
@@ -183,7 +176,7 @@ class _add_event_page extends State<add_event_page> {
                           Navigator.push(
                               context,
                               PageRouteBuilder(
-                                  pageBuilder: (_, __, ___) => form_cours()));
+                                  pageBuilder: (_, __, ___) => const FormCourse()));
                         },
                         child: Container(
                           width: 500,
@@ -198,7 +191,7 @@ class _add_event_page extends State<add_event_page> {
                               children: const [
                                 ListTile(
                                   leading: Icon(Icons.add, size: 70),
-                                  title: Text('Ajouter un cours',
+                                  title: Text('Organiser un cours',
                                       style: TextStyle(color: Colors.white)),
                                 ),
                                 Text('', style: TextStyle(color: Colors.white)),

@@ -1,5 +1,4 @@
 import 'package:ecurie_party/db/database.dart';
-import 'package:ecurie_party/models/log.dart';
 import 'package:flutter/material.dart';
 
 import 'Pages/login.dart';

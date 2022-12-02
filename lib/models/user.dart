@@ -1,4 +1,4 @@
-import 'package:ecurie_party/models/db_collection.dart';
+import 'db_collection.dart';
 
 @collection
 class User extends DbCollection{

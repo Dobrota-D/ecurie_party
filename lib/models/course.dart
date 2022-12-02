@@ -16,6 +16,7 @@ class Course extends Event {
       super.horsemenList,
       super.date,
       super.location,
+      super.isAuthorise,
       this.terrainType,
       this.duration,
       this.discipline);
@@ -28,6 +29,7 @@ class Course extends Event {
         data["idUser"],
         data["horsemenList"],
         data["date"],
+        data["isAuthorise"],
         data["location"],
         data["terrainType"],
         data["duration"],
