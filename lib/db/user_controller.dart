@@ -7,13 +7,6 @@ class UserController {
     db.get(collectionName, {"id": idUser});
   }
 
-  // registration of a new user in the database
-  static void registerUser(
-      DataBase db, String name, String email, String password) {
-    db.insert(
-        collectionName, {"name": name, "email": email, "password": password});
-  }
-
   // update the user's name
   static void updateUserName(DataBase db, int idUser, String name) {
     db.update(collectionName, {"id": idUser}, {"name": name});

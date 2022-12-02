@@ -1,8 +1,12 @@
+
 import 'package:ecurie_party/Pages/actualites.dart';
+import 'package:ecurie_party/main.dart';
+import 'package:ecurie_party/regex_reg.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
+
+import '../db/database.dart';
 
 class login extends StatefulWidget {
   @override
@@ -28,9 +32,11 @@ class _login extends State<login> {
     print(EmailController.text);
     print(PasswordController.text);
   }
+ late BuildContext _context;
 
   @override
   Widget build(BuildContext context) {
+    _context = context;
     return Stack(
       children: [
         Container(
@@ -128,11 +134,9 @@ class _login extends State<login> {
                                     labelText: 'Nom',
                                   ),
                                   controller: NameController,
-                                  validator: (textMail) {
-                                    if (textMail!.isEmpty) {
-                                      return 'Veuillez saisir un texte';
-                                    }
-                                    return null;
+                                  validator: (textName) {
+                                    if (textName == '') return 'Ce champs est obligatoire';
+                                    else if (textName!.length < 4) return 'Le nom doit contenir plus de 3 Charactères';
                                   },
                                 ),
                               ),
@@ -146,11 +150,9 @@ class _login extends State<login> {
                                     labelText: 'Prénom',
                                   ),
                                   controller: FirstnameController,
-                                  validator: (textMail) {
-                                    if (textMail!.isEmpty) {
-                                      return 'Veuillez saisir un texte';
-                                    }
-                                    return null;
+                                  validator: (textFirstName) {
+                                    if (textFirstName == '') return 'Ce champs est obligatoire';
+                                    else if (textFirstName!.length < 4) return "Le prénom doit contenir plus de 3 Charactères";
                                   },
                                 ),
                               ),
@@ -165,10 +167,8 @@ class _login extends State<login> {
                                   ),
                                   controller: EmailController,
                                   validator: (textMail) {
-                                    if (textMail!.isEmpty) {
-                                      return 'Veuillez saisir un texte';
-                                    }
-                                    return null;
+                                    if (textMail == '') return 'Ce champs est obligatoire';
+                                    else if (!textMail!.isValidEmail()) return 'email invalide';
                                   },
                                 ),
                               ),
@@ -182,11 +182,9 @@ class _login extends State<login> {
                                     labelText: 'Mot de passe',
                                   ),
                                   controller: PasswordController,
-                                  validator: (textMail) {
-                                    if (textMail!.isEmpty) {
-                                      return 'Veuillez saisir un texte';
-                                    }
-                                    return null;
+                                  validator: (textpass) {
+                                    if (textpass =='') return 'Ce champs est obligatoire';
+                                    else if (textpass!.length < 6) return 'Le mot de passe est invalide 5 charatères minimum';
                                   },
                                 ),
                               ),
@@ -200,11 +198,9 @@ class _login extends State<login> {
                                     labelText: 'URL photo',
                                   ),
                                   controller: ImageController,
-                                  validator: (textMail) {
-                                    if (textMail!.isEmpty) {
-                                      return 'Veuillez saisir un texte';
-                                    }
-                                    return null;
+                                  validator: (textUrlImg) {
+                                    if (textUrlImg!.isEmpty) return 'Veuillez saisir un texte';
+                                    else if (textUrlImg!.length < 7) return 'url invalide';
                                   },
                                 ),
                               ),
@@ -213,7 +209,27 @@ class _login extends State<login> {
                         ),
                         actions: <Widget>[
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              var name = NameController.text;
+                              var firstName = FirstnameController.text;
+                              var email = EmailController.text;
+                              var pwd = PasswordController.text;
+                              var imageUrl = ImageController.text;
+
+
+                              if (_formKey.currentState!.validate()) {
+                                if (!await isUserExists(email, name)) {
+                                  MyApp.myDb.createElement('users',
+                                      {"name": name, "first name": firstName, "password": pwd, "email": email, "profileImg": imageUrl}
+                                  ).then((value) {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => actualites()),
+                                    );
+                                  });
+                                }
+                              }
+                            },
                             style: ElevatedButton.styleFrom(primary: Colors.transparent,
                               shadowColor: Colors.transparent.withOpacity(0.1),
                             ),
@@ -250,5 +266,21 @@ class _login extends State<login> {
         )
       ],
     );
+  }
+  isUserExists(String email, String name) async {
+    Map<String, bool> errors = await MyApp.myDb.checkUserExists(email, name);
+    if (errors["email"]!) {
+      displaySnackBar('Cet email est déjà utilisé');
+      return true;
+    }
+    return false;
+  }
+
+  displaySnackBar(String msg) {
+    var snackBar = SnackBar(
+        backgroundColor: Colors.red,
+        content: Text(msg)
+    );
+    ScaffoldMessenger.of(_context).showSnackBar(snackBar);
   }
 }
