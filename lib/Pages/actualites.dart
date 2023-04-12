@@ -1,5 +1,8 @@
 import 'package:ecurie_party/Pages/add_event_page.dart';
 import 'package:ecurie_party/Pages/profil.dart';
+import 'package:ecurie_party/db/logController.dart';
+import 'package:ecurie_party/main.dart';
+import 'package:ecurie_party/models/log.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
@@ -17,6 +20,7 @@ class actualites extends StatefulWidget {
 class _actualites extends State<actualites> {
   bool? isHere = false;
   bool? participation = false;
+  var list_card = [];
 
   Color _colorFond = const Color(0xFFFFF3E0);
   Color _colorButton = const Color(0xFF730800);
@@ -26,223 +30,235 @@ class _actualites extends State<actualites> {
   TextEditingController FirstnameController = TextEditingController();
   TextEditingController MailController = TextEditingController();
 
+  getDbHorse() async {
+    List<Log> temp = await LogController.getListLog(MyApp.myDb);
+    if (temp.isNotEmpty) {
+      print(temp);
+      setState(() {
+        list_card = temp;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            color: _colorBottumNavBar,
-          ),
-        ),
-        Scaffold(
-          backgroundColor: _colorBottumNavBar,
-          appBar: AppBar(
-              backgroundColor: _colorButton,
-              centerTitle: true,
-              title: Text('Fil d\'actualité')),
-          bottomNavigationBar: BottomAppBar(
-            color: _colorFond,
+    getDbHorse();
+    return Scaffold(
+      backgroundColor: _colorBottumNavBar,
+      appBar: AppBar(
+          backgroundColor: _colorButton,
+          centerTitle: true,
+          title: Text('Fil d\'actualité')),
+      bottomNavigationBar: BottomAppBar(
+        color: _colorFond,
 
-            // <-- APPBAR WITH TRANSPARENT BG
-            elevation: 0,
+        // <-- APPBAR WITH TRANSPARENT BG
+        elevation: 0,
 
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                IconButton(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
-                  icon: Icon(
-                    Icons.article,
-                    size: 40,
-                    color: _colorBottumNavBar,
-                  ),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => actualites()));
-                    // do something
-                  },
-                ),
-                IconButton(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
-                  icon: Icon(
-                    Icons.add,
-                    size: 40,
-                    color: _colorBottumNavBar,
-                  ),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => add_event_page()));
-                    // do something
-                  },
-                ),
-
-                IconButton(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
-                  icon: Icon(
-                    Icons.calendar_month,
-                    size: 40,
-                    color: _colorBottumNavBar,
-                  ),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => calendrier()));
-                    // do something
-                  },
-                ),
-                IconButton(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
-                  icon: Icon(
-                    Icons.face,
-                    color: _colorBottumNavBar,
-                    size: 40,
-                  ),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        PageRouteBuilder(
-                            pageBuilder: (_, __, ___) => profil()));
-                    // do something
-                  },
-                ),
-                // IconButton(icon: Icon(Icons.search), onPressed: () {},),
-              ],
-            ),
-          ),
-          body: ListView(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                              pageBuilder: (_, __, ___) => user_list()));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.transparent,
-                      shadowColor: Colors.transparent.withOpacity(0.1),
-                    ),
-                    child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 16),
-                        child: Container(
-                            width: 150,
-                            height: 150,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10.0),
-                              child: Image.asset(
-                                'assets/images/cavalier.jpg',
-                                height: 100.0,
-                                width: 100.0,
-                                fit: BoxFit.cover,
-                              ),
-                            ))),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                              pageBuilder: (_, __, ___) => cheval_list()));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.transparent,
-                      shadowColor: Colors.transparent.withOpacity(0.1),
-                    ),
-                    child: SizedBox(
-                        width: 150,
-                        height: 150,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: Image.asset(
-                            'assets/images/cheval.jpg',
-                            height: 100.0,
-                            width: 100.0,
-                            fit: BoxFit.cover,
-                          ),
-                        )),
-                  ),
-                ],
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            IconButton(
+              padding: EdgeInsets.symmetric(horizontal: 30),
+              icon: Icon(
+                Icons.article,
+                size: 40,
+                color: _colorBottumNavBar,
               ),
-              GestureDetector(
-                onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) => AlertDialog(
-                            backgroundColor: _colorFond,
-                            title: Text("Infos",
-                                style: TextStyle(color: _colorBottumNavBar)),
-                            content: Form(
-                              key: _formKey,
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 16),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      child: Image.network(
-                                        'https://blog.cap-adrenaline.com/wp-content/uploads/2022/03/equipement-cours-equitation.jpg',
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context,
+                    PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => actualites()));
+                // do something
+              },
+            ),
+            IconButton(
+              padding: EdgeInsets.symmetric(horizontal: 30),
+              icon: Icon(
+                Icons.add,
+                size: 40,
+                color: _colorBottumNavBar,
+              ),
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context,
+                    PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => add_event_page()));
+                // do something
+              },
+            ),
+
+            IconButton(
+              padding: EdgeInsets.symmetric(horizontal: 30),
+              icon: Icon(
+                Icons.calendar_month,
+                size: 40,
+                color: _colorBottumNavBar,
+              ),
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context,
+                    PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => calendrier()));
+                // do something
+              },
+            ),
+            IconButton(
+              padding: EdgeInsets.symmetric(horizontal: 30),
+              icon: Icon(
+                Icons.face,
+                color: _colorBottumNavBar,
+                size: 40,
+              ),
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context,
+                    PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => profil()));
+                // do something
+              },
+            ),
+            // IconButton(icon: Icon(Icons.search), onPressed: () {},),
+          ],
+        ),
+      ),
+      body: Column(
+        children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => user_list()));
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.transparent,
+                shadowColor: Colors.transparent.withOpacity(0.1),
+              ),
+              child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8, vertical: 16),
+                  child: Container(
+                      width: 150,
+                      height: 150,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: Image.asset(
+                          'assets/images/cavalier.jpg',
+                          height: 100.0,
+                          width: 100.0,
+                          fit: BoxFit.cover,
+                        ),
+                      ))),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => cheval_list()));
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.transparent,
+                shadowColor: Colors.transparent.withOpacity(0.1),
+              ),
+              child: SizedBox(
+                  width: 150,
+                  height: 150,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child: Image.asset(
+                      'assets/images/cheval.jpg',
+                      height: 100.0,
+                      width: 100.0,
+                      fit: BoxFit.cover,
+                    ),
+                  )),
+            ),
+          ],
+        ),
+        Expanded(
+          child: SizedBox(
+            height: 200.0,
+            child: ListView.builder(
+
+              itemCount: 0,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) =>
+                            AlertDialog(
+                              backgroundColor: _colorFond,
+                              title: Text("Info",
+                                  style: TextStyle(color: _colorBottumNavBar)),
+                              content: Form(
+                                key: _formKey,
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8, vertical: 16),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(
+                                            20.0),
+                                        child: Image.network(
+                                          'https://blog.cap-adrenaline.com/wp-content/uploads/2022/03/equipement-cours-equitation.jpg',
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Text(
-                                    "Course d'endurance",
-                                    style: TextStyle(
-                                      fontSize: 30,
-                                      color: _colorBottumNavBar,
+                                    Text(
+                                      list_card[index].title,
+                                      style: TextStyle(
+                                        fontSize: 30,
+                                        color: _colorBottumNavBar,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    "\nCergy",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: _colorBottumNavBar,
+                                    Text(
+                                      "\nCergy",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        color: _colorBottumNavBar,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    "\n12/12 à 13:00",
-                                    style: TextStyle(
-                                      fontSize: 17,
-                                      color: _colorBottumNavBar,
+                                    Text(
+                                      list_card[index].date.toString(),
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        color: _colorBottumNavBar,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    "\nListe des participants: \n\nPepito \nGranola \nPetit Lu",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      color: _colorBottumNavBar,
+                                    Text(
+                                      "\nListe des participants: \n\nPepito \nGranola \nPetit Lu",
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: _colorBottumNavBar,
+                                      ),
                                     ),
-                                  ),
-                                  CheckboxListTile(
-                                    value: participation,
-                                    onChanged: (bool? value) {
-                                      setState(() {
-                                        participation = value;
-                                        Navigator.of(context).pop();
-                                      });
-                                    },
-                                    title: Text("Je participe",
-                                        style: TextStyle(
-                                            color: _colorBottumNavBar)),
-                                  ),
-                                ],
+                                    CheckboxListTile(
+                                      value: participation,
+                                      onChanged: (bool? value) {
+                                        setState(() {
+                                          participation = value;
+                                          Navigator.of(context).pop();
+                                        });
+                                      },
+                                      title: Text("Je participe",
+                                          style: TextStyle(
+                                              color: _colorBottumNavBar)),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ));
-                },
-                child: Container(
+                            ));
+                  },
                   child: Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
@@ -254,12 +270,12 @@ class _actualites extends State<actualites> {
                       children: [
                         ListTile(
                           //  leading: Icon(Icons.add, size: 70),
-                          title: Text('Endurance : Cergy ',
+                          title: Text(list_card[index].title,
                               style: TextStyle(
                                 color: _colorBottumNavBar,
                                 fontWeight: FontWeight.bold,
                               )),
-                          subtitle: Text('12/12 à 13:00',
+                          subtitle: Text(list_card[index].date.toString(),
                               style: TextStyle(color: _colorBottumNavBar)),
                         ),
                         Visibility(
@@ -276,12 +292,13 @@ class _actualites extends State<actualites> {
                       ],
                     ),
                   ),
-                ),
-              ),
-            ],
+                );
+              },
+            )
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
